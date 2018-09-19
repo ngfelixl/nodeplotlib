@@ -1,5 +1,7 @@
 # NodePlot
 
+[![Build Status](https://travis-ci.org/ngfelixl/nodeplot.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplot)
+
 ## Installation
 
 ```sh
