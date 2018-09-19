@@ -1,6 +1,8 @@
 # NodePlot
 
 [![Build Status](https://travis-ci.org/ngfelixl/nodeplot.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplot)
+[![Coverage Status](https://coveralls.io/repos/github/ngfelixl/nodeplot/badge.svg?branch=master)](https://coveralls.io/github/ngfelixl/nodeplot?branch=master)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplot/)
 
 ## Installation
 
