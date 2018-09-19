@@ -57,20 +57,14 @@ Be sure to run the `plot()` function without any argument at the end.
 
 For the different plot types have a look at the [Plotly.js documentation](https://plot.ly/javascript/). It handles
 
-- Scatter Plots
-- Line Charts
-- Bar Charts
-- Pie Charts
-- Sankey diagrams,
-- Tables
-
-- 2d density plots,
-- Histograms
-- Box-plots
-- Contour plots
-- Heatmaps
-- Radar charts
-- Carpet plots
+| Simple charts              | Advanced charts             |
+| -------------------------- | --------------------------- |
+| Scatter Plots              | 2d density plots            |
+| Line Charts                | Histograms                  |
+| Bar Charts                 | Box-plots                   |
+| Pie Charts                 | Contour plots               |
+| Sankey diagrams            | Heatmaps                    |
+| Tables                     | Radar charts                |
 
 Any many more different plottypes.
 
