@@ -1,15 +1,15 @@
-# NodePlot
+# NodePlotLib
 
-[![Build Status](https://travis-ci.org/ngfelixl/nodeplot.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplot)
-[![Coverage Status](https://coveralls.io/repos/github/ngfelixl/nodeplot/badge.svg?branch=master)](https://coveralls.io/github/ngfelixl/nodeplot?branch=master)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplot/)
+[![Build Status](https://travis-ci.org/ngfelixl/nodeplotlib.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplotlib)
+[![Coverage Status](https://coveralls.io/repos/github/ngfelixl/nodeplot/badge.svg?branch=master)](https://coveralls.io/github/ngfelixl/nodeplotlib?branch=master)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
 ## Installation
 
 ```sh
-npm install nodeplot
+npm install nodeplotlib
 # or
-yarn add nodeplot
+yarn add nodeplotlib
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ Since Python provides with matplotlib a library for spawning plot windows, NodeJ
 The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a `clear` function.
 
 ```typescript
-import { plot, stack, clear } from 'nodeplot'
+import { plot, stack, clear } from 'nodeplotlib'
 import { PlotData } from 'plotly.js'
 
 const data: Partial<PlotData>[] = [
@@ -37,7 +37,7 @@ With the stack function the user is able to print multiple charts on one page.
 
 
 ```typescript
-import { plot, stack, clear } from 'nodeplot'
+import { plot, stack, clear } from 'nodeplotlib'
 import { PlotData } from 'plotly.js'
 
 const data: Partial<PlotData>[] = [
