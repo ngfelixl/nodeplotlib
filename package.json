@@ -1,8 +1,9 @@
 {
   "name": "nodeplotlib",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJS plot lib on top of plotly.js",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "istanbul cover node_modules/mocha/bin/_mocha test/*.js -- -R spec",
     "start": "tsc ./test/index.ts && node ./test",
