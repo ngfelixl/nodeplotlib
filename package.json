@@ -1,7 +1,7 @@
 {
   "name": "nodeplotlib",
-  "version": "0.0.3",
-  "description": "NodeJS plot lib on top of plotly.js",
+  "version": "0.0.4",
+  "description": "NodeJS plot lib on top of plotly.js for easy plot serverside plot spawns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
