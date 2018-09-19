@@ -1,5 +1,5 @@
 {
-  "name": "nodeplot",
+  "name": "nodeplotlib",
   "version": "0.0.1",
   "description": "NodeJS plot lib on top of plotly.js",
   "main": "index.js",
@@ -17,7 +17,9 @@
     "plotly",
     "plotlyjs",
     "easy-to-use",
-    "backend"
+    "backend",
+    "spawn",
+    "browser"
   ],
   "author": "Felix Lemke <flemke.dev@gmail.com> (https://felixlemke.com)",
   "license": "MIT",
