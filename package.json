@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NodeJS plot lib on top of plotly.js",
   "main": "index.js",
   "scripts": {
