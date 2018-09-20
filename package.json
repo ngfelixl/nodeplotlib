@@ -6,10 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "istanbul cover node_modules/mocha/bin/_mocha test/*.js -- -R spec",
-    "start": "tsc ./test/index.ts && node ./test",
     "uglify": "uglifyjs dist/index.js --mangle --compress -o dist/index.min.js",
     "copy": "copyfiles -u 1 src/www/index.html dist",
-    "build": "tsc -p src && npm run copy && npm run uglify"
+    "build": "tsc -p src/www && tsc -p src && npm run copy && npm run uglify"
   },
   "keywords": [
     "node",

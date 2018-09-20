@@ -1,7 +1,7 @@
 "use strict";
 window.addEventListener('load', () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:8080/data');
+    xhr.open('GET', `http://localhost:8080/data/{{plotId}}`);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
             const container = JSON.parse(xhr.responseText);
@@ -18,4 +18,3 @@ window.addEventListener('load', () => {
     };
     xhr.send();
 });
-//# sourceMappingURL=script.js.map

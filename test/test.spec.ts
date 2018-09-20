@@ -12,39 +12,43 @@ describe('Test plotting', () => {
     type: 'scatter'
   }];
 
-  plot(test);
-  clear();
-
-  stack(test);
-  stack(test);
-  stack(test);
-  plot();
-
-  it('should serve a website', (done) => {
-    get('http://localhost:8080', (res) => {
-      let body = '';
-      res.on('data', data => {
-          body += data;
-      });
-      res.on('end', () => {
-        assert.match(body.toString(), /<!DOCTYPE html>[\s\S]*<html>[\s\S.]*<\/html>/);
-        done();
+  it('should serve a website for plot 1', (done) => {
+    plot(test, (plotId: number) => {
+      get(`http://localhost:8080/plots/${plotId}`, (res) => {
+        let body = '';
+        res.on('data', data => {
+            body += data;
+        });
+        res.on('end', () => {
+          assert.match(body.toString(), /<!DOCTYPE html>[\s\S]*<html[\s\S.]*>[\s\S.]*<\/html>/);
+          done();
+        });
       });
     });
   });
 
-  it('should get plot data', (done) => {
-    get('http://localhost:8080/data', (res) => {
-      let body = '';
-      res.on('data', data => {
-          body += data;
-      });
-      res.on('end', () => {
-        const data = JSON.parse(body.toString());
-        expect(data).to.eql([test, test, test]);
-        done();
+  it('should get plot 2 data', (done) => {
+    stack(test);
+    stack(test);
+    stack(test);
+    plot(null, (plotId: number) => {
+      get(`http://localhost:8080/data/${plotId}`, (res) => {
+        let body = '';
+        res.on('data', data => {
+            body += data;
+        });
+        res.on('end', () => {
+          const data = JSON.parse(body.toString());
+          expect(data).to.eql([test, test, test]);
+          done();
+        });
       });
     });
+  });
+
+  it('Test plot 3 without callback', () => {
+    clear();
+    plot([...test, ...test]);
   });
 });
 

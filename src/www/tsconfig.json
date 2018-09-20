@@ -1,11 +1,10 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "sourceMap": false,
+    "declaration": false
   },
   "files": [
-    "./index.ts"
-  ],
-  "exclude": [
-    "../test"
+    "./script.ts"
   ]
 }
