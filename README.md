@@ -15,6 +15,26 @@ yarn add nodeplotlib
 
 ## Usage
 
+### Overview
+
+Use it within NodeJS (TypeScript):
+
+```typescript
+import { plot } from 'nodeplotlib';
+const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
+plot(data);
+```
+
+Use it in NodeJS (JavaScript):
+
+```javascript
+const plotlib = require('nodeplotlib');
+const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
+plotlib.plot(data);
+```
+
+### Details
+
 Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default. But there are awesome plotting libraries for usage in front-end. So this lib targets people like scientists who easily want to create beautiful plots in a time-saving way.
 
 The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a `clear` function. The `plot()` functions spawns a plot to the browser, if a plotdata is given as an argument. Otherwise it plots all the `stack()`ed plotdata. The arguments are of type Plotly.js `PlotData`. With the `clear()` function the stack container can be cleared.
@@ -44,8 +64,8 @@ plot([{ x: tensorX, y: tensorY, type: 'line' }]);
 With the stack function the user is able to print multiple charts on one page (e.g. three times the same plot).
 
 ```typescript
-import { plot, stack, clear } from 'nodeplotlib'
-import { PlotData } from 'plotly.js'
+import { plot, stack, clear } from 'nodeplotlib';
+import { PlotData } from 'plotly.js';
 
 const data: Partial<PlotData>[] = [{
   x: [ 1, 3, 4, 6, 7],
