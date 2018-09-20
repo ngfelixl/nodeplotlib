@@ -29,7 +29,6 @@ function plot(data, cb) {
     plotContainer[id] = {
         opened: false,
         pending: false,
-        request: false,
         data: tempContainer
     };
     tempContainer = [];
@@ -38,18 +37,17 @@ function plot(data, cb) {
             cb(id);
         }
     });
-    return id;
 }
 exports.plot = plot;
 function spawn(cb) {
     if (!exports.server.active && !exports.server.loading) {
-        console.log('Open server');
         exports.server.loading = true;
         app.get('/data/:id', (req, res) => {
             const requestId = req.params.id;
             const container = plotContainer[requestId];
             const result = container && container.data;
-            container.request = true;
+            plotContainer[requestId].opened = true;
+            plotContainer[requestId].pending = false;
             res.send(result);
             close();
         });
@@ -76,15 +74,10 @@ function spawn(cb) {
     }
 }
 function openPlots() {
-    const promises = [];
     for (const plotEntry of Object.entries(plotContainer)) {
         if (!plotEntry[1].opened && !plotEntry[1].pending) {
             plotEntry[1].pending = true;
-            promises.push(opn(`http://localhost:${port}/plots/${plotEntry[0]}`)
-                .then(() => {
-                plotEntry[1].opened = true;
-                plotEntry[1].pending = false;
-            }));
+            opn(`http://localhost:${port}/plots/${plotEntry[0]}`);
         }
     }
 }
@@ -92,15 +85,13 @@ function close() {
     const pending = Object.values(plotContainer)
         .map(o => o.pending)
         .reduce((a, b) => a || b);
-    const requested = Object.values(plotContainer)
-        .map(o => o.request)
+    const opened = Object.values(plotContainer)
+        .map(o => o.opened)
         .reduce((a, b) => a && b);
-    if (exports.server.instance && exports.server.active && !pending && requested) {
-        console.log('Close server');
+    if (exports.server.instance && exports.server.active && !pending && opened) {
         exports.server.instance.close(() => {
-            exports.server.instance = null;
+            exports.server.active = false;
         });
-        exports.server.active = false;
     }
 }
 //# sourceMappingURL=index.js.map

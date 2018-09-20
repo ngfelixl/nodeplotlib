@@ -17,17 +17,20 @@ describe('Test plotting', () => {
       get(`http://localhost:8080/plots/${plotId}`, (res) => {
         let body = '';
         res.on('data', data => {
-            body += data;
+          body += data;
         });
         res.on('end', () => {
           assert.match(body.toString(), /<!DOCTYPE html>[\s\S]*<html[\s\S.]*>[\s\S.]*<\/html>/);
           done();
         });
+        res.on('error', () => { done(); });
       });
+
+      get(`http://localhost:8080/data/${plotId}`, (res) => {});
     });
   });
 
-  it('should get plot 2 data', (done) => {
+  it('should get plot 2 data plotted with stack()', (done) => {
     stack(test);
     stack(test);
     stack(test);
@@ -42,13 +45,31 @@ describe('Test plotting', () => {
           expect(data).to.eql([test, test, test]);
           done();
         });
+        res.on('error', () => { done(); });
       });
     });
   });
 
-  it('Test plot 3 without callback', () => {
+  it('should spawn plot4 while plot3 not finished', (done) => {
     clear();
-    plot([...test, ...test]);
+    plot(test, (plot3Id: number) => {
+      get(`http://localhost:8080/data/${plot3Id}`);
+
+      plot(test, (plotId: number) => {
+        get(`http://localhost:8080/data/${plotId}`, (res) => {
+          let body = '';
+          res.on('data', data => {
+              body += data;
+          });
+          res.on('end', () => {
+            const data = JSON.parse(body.toString());
+            expect(data).to.eql([test]);
+            done();
+          });
+          res.on('error', (error) => { console.error(error); done(); });
+        });
+      });
+    });
   });
 });
 

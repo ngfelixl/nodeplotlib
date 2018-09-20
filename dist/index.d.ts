@@ -9,5 +9,5 @@ interface IServer {
 export declare const server: IServer;
 export declare function clear(): void;
 export declare function stack(data: Partial<PlotData>[]): void;
-export declare function plot(data?: Partial<PlotData>[] | null, cb?: Function): number;
+export declare function plot(data?: Partial<PlotData>[] | null, cb?: Function): void;
 export {};

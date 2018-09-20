@@ -11,7 +11,6 @@ interface PlotContainer {
   [id: number]: {
     opened: boolean;
     pending: boolean;
-    request: boolean;
     data: Partial<PlotData>[][];
   };
 }
@@ -41,14 +40,13 @@ export function stack(data: Partial<PlotData>[]): void {
   tempContainer.push(data);
 }
 
-export function plot(data?: Partial<PlotData>[] | null, cb?: Function): number {
+export function plot(data?: Partial<PlotData>[] | null, cb?: Function): void {
   if (data) { tempContainer.push(data); }
   const id = Object.keys(plotContainer).length;
 
   plotContainer[id] = {
     opened: false,
     pending: false,
-    request: false,
     data: tempContainer
   };
   tempContainer = [];
@@ -57,18 +55,17 @@ export function plot(data?: Partial<PlotData>[] | null, cb?: Function): number {
       cb(id);
     }
   });
-  return id;
 }
 
 function spawn(cb: Function) {
   if (!server.active && !server.loading) {
-    console.log('Open server');
     server.loading = true;
     app.get('/data/:id', (req, res) => {
       const requestId = req.params.id;
       const container = plotContainer[requestId];
       const result = container && container.data;
-      container.request = true;
+      plotContainer[requestId].opened = true;
+      plotContainer[requestId].pending = false;
       res.send(result);
       close();
     });
@@ -97,15 +94,10 @@ function spawn(cb: Function) {
 }
 
 function openPlots() {
-  const promises = [];
   for (const plotEntry of Object.entries(plotContainer)) {
     if (!plotEntry[1].opened && !plotEntry[1].pending) {
       plotEntry[1].pending = true;
-      promises.push(opn(`http://localhost:${port}/plots/${plotEntry[0]}`)
-        .then(() => {
-          plotEntry[1].opened = true;
-          plotEntry[1].pending = false;
-        }));
+      opn(`http://localhost:${port}/plots/${plotEntry[0]}`);
     }
   }
 }
@@ -114,15 +106,13 @@ function close() {
   const pending = Object.values(plotContainer)
     .map(o => o.pending)
     .reduce((a, b) => a || b);
-  const requested = Object.values(plotContainer)
-    .map(o => o.request)
+  const opened = Object.values(plotContainer)
+    .map(o => o.opened)
     .reduce((a, b) => a && b);
 
-  if (server.instance && server.active && !pending && requested) {
-    console.log('Close server');
+  if (server.instance && server.active && !pending && opened) {
     (<Server>server.instance).close(() => {
-      server.instance = null;
+      server.active = false;
     });
-    server.active = false;
   }
 }
