@@ -20,7 +20,9 @@ function stack(data) {
 exports.stack = stack;
 function plot(data) {
     checkReset();
-    data && container.push(data);
+    if (data) {
+        container.push(data);
+    }
     spawn();
     resetFlag = true;
 }

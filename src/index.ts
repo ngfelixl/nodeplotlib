@@ -23,7 +23,9 @@ export function stack(data: Partial<PlotData>[]): void {
 
 export function plot(data?: Partial<PlotData>[]): void {
   checkReset();
-  data && container.push(data);
+  if (data) {
+    container.push(data);
+  }
   spawn();
   resetFlag = true;
 }

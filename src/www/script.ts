@@ -7,11 +7,13 @@ window.addEventListener('load', () => {
       const container = JSON.parse(xhr.responseText);
       const element = document.getElementById('container');
 
-      for (let i = 0; i < container.length; i++) {
-        const toAppend = document.createElement('div');
-        toAppend.id = `container_${i}`;
-        element && element.appendChild(toAppend);
-        Plotly.newPlot(`container_${i}`, container[i]);
+      if (element) {
+        for (let i = 0; i < container.length; i++) {
+          const toAppend = document.createElement('div');
+          toAppend.id = `container_${i}`;
+          element.appendChild(toAppend);
+          Plotly.newPlot(`container_${i}`, container[i]);
+        }
       }
     }
   };

@@ -14,12 +14,12 @@ describe('Test plotting', () => {
 
   plot(test);
   clear();
-  
+
   stack(test);
   stack(test);
   stack(test);
   plot();
-  
+
   it('should serve a website', (done) => {
     get('http://localhost:8080', (res) => {
       let body = '';
@@ -30,7 +30,7 @@ describe('Test plotting', () => {
         assert.match(body.toString(), /<!DOCTYPE html>[\s\S]*<html>[\s\S.]*<\/html>/);
         done();
       });
-    })
+    });
   });
 
   it('should get plot data', (done) => {
@@ -43,8 +43,8 @@ describe('Test plotting', () => {
         const data = JSON.parse(body.toString());
         expect(data).to.eql([test, test, test]);
         done();
-      })
+      });
     });
   });
-})
+});
 

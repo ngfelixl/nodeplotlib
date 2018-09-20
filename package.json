@@ -1,7 +1,7 @@
 {
   "name": "nodeplotlib",
-  "version": "0.0.4",
-  "description": "NodeJS plot lib on top of plotly.js for easy plot serverside plot spawns",
+  "version": "0.0.5",
+  "description": "NodeJS plot lib on top of plotly.js for easy serverside plot spawns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -43,6 +43,7 @@
     "mocha": "^5.2.0",
     "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
     "typescript": "^3.0.3",
     "uglify-es": "^3.3.9"
   }
