@@ -5,6 +5,9 @@
 [![npm version](https://badge.fury.io/js/nodeplotlib.svg)](https://badge.fury.io/js/nodeplotlib)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
+Create publication-ready plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
+without any front-end preparations. Inspired by matplotlib.
+
 ## Installation
 
 ```sh
