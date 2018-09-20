@@ -17,19 +17,21 @@ function clear() {
     tempContainer = [];
 }
 exports.clear = clear;
-function stack(data) {
-    tempContainer.push(data);
+function stack(data, layout) {
+    const container = layout ? { data, layout } : { data };
+    tempContainer.push(container);
 }
 exports.stack = stack;
-function plot(data, cb) {
+function plot(data, layout, cb) {
     if (data) {
-        tempContainer.push(data);
+        const container = layout ? { data, layout } : { data };
+        tempContainer.push(container);
     }
     const id = Object.keys(plotContainer).length;
     plotContainer[id] = {
         opened: false,
         pending: false,
-        data: tempContainer
+        plots: tempContainer
     };
     tempContainer = [];
     spawn(() => {
@@ -45,10 +47,10 @@ function spawn(cb) {
         app.get('/data/:id', (req, res) => {
             const requestId = req.params.id;
             const container = plotContainer[requestId];
-            const result = container && container.data;
+            const plots = container && container.plots;
             plotContainer[requestId].opened = true;
             plotContainer[requestId].pending = false;
-            res.send(result);
+            res.send(plots);
             close();
         });
         app.get('/plots/:id', (req, res) => {

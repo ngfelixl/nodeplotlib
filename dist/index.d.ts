@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { PlotData } from 'plotly.js';
+import { PlotData, Layout } from 'plotly.js';
 import { Server } from 'http';
 interface IServer {
     active: boolean;
@@ -8,6 +8,6 @@ interface IServer {
 }
 export declare const server: IServer;
 export declare function clear(): void;
-export declare function stack(data: Partial<PlotData>[]): void;
-export declare function plot(data?: Partial<PlotData>[] | null, cb?: Function): void;
+export declare function stack(data: Partial<PlotData>[], layout?: Partial<Layout>): void;
+export declare function plot(data?: Partial<PlotData>[] | null, layout?: Partial<Layout>, cb?: Function): void;
 export {};

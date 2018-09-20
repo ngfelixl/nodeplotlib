@@ -12,7 +12,8 @@ window.addEventListener('load', () => {
           const toAppend = document.createElement('div');
           toAppend.id = `container_${i}`;
           element.appendChild(toAppend);
-          Plotly.newPlot(`container_${i}`, container[i]);
+          const plot = container[i];
+          Plotly.newPlot(`container_${i}`, plot.data, plot.layout);
         }
       }
     }

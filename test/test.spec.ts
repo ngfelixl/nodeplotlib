@@ -13,7 +13,7 @@ describe('Test plotting', () => {
   }];
 
   it('should serve a website for plot 1', (done) => {
-    plot(test, (plotId: number) => {
+    plot(test, {title: 'Plot1'}, (plotId: number) => {
       get(`http://localhost:8080/plots/${plotId}`, (res) => {
         let body = '';
         res.on('data', data => {
@@ -31,10 +31,10 @@ describe('Test plotting', () => {
   });
 
   it('should get plot 2 data plotted with stack()', (done) => {
+    stack(test, {title: 'Plot2'});
     stack(test);
     stack(test);
-    stack(test);
-    plot(null, (plotId: number) => {
+    plot(null, undefined, (plotId: number) => {
       get(`http://localhost:8080/data/${plotId}`, (res) => {
         let body = '';
         res.on('data', data => {
@@ -42,7 +42,7 @@ describe('Test plotting', () => {
         });
         res.on('end', () => {
           const data = JSON.parse(body.toString());
-          expect(data).to.eql([test, test, test]);
+          expect(data).to.eql([{data: test, layout: {title: 'Plot2'}}, {data: test}, {data: test}]);
           done();
         });
         res.on('error', () => { done(); });
@@ -52,10 +52,10 @@ describe('Test plotting', () => {
 
   it('should spawn plot4 while plot3 not finished', (done) => {
     clear();
-    plot(test, (plot3Id: number) => {
+    plot(test, undefined, (plot3Id: number) => {
       get(`http://localhost:8080/data/${plot3Id}`);
 
-      plot(test, (plotId: number) => {
+      plot(test, undefined, (plotId: number) => {
         get(`http://localhost:8080/data/${plotId}`, (res) => {
           let body = '';
           res.on('data', data => {
@@ -63,7 +63,7 @@ describe('Test plotting', () => {
           });
           res.on('end', () => {
             const data = JSON.parse(body.toString());
-            expect(data).to.eql([test]);
+            expect(data).to.eql([{data: test}]);
             done();
           });
           res.on('error', (error) => { console.error(error); done(); });

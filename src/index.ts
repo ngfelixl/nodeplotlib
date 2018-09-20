@@ -1,5 +1,5 @@
 
-import { PlotData } from 'plotly.js';
+import { PlotData, Layout } from 'plotly.js';
 import opn = require('opn');
 
 import * as express from 'express';
@@ -7,11 +7,16 @@ import { readFile } from 'fs';
 import { join } from 'path';
 import { Server } from 'http';
 
+interface Plot {
+  data: Partial<PlotData>[];
+  layout?: Partial<Layout>;
+}
+
 interface PlotContainer {
   [id: number]: {
     opened: boolean;
     pending: boolean;
-    data: Partial<PlotData>[][];
+    plots: Plot[];
   };
 }
 
@@ -29,25 +34,29 @@ export const server: IServer = {
 
 const app = express();
 const port = 8080;
-let tempContainer: Partial<PlotData>[][] = [];
+let tempContainer: Plot[] = [];
 const plotContainer: PlotContainer = {};
 
 export function clear(): void {
   tempContainer = [];
 }
 
-export function stack(data: Partial<PlotData>[]): void {
-  tempContainer.push(data);
+export function stack(data: Partial<PlotData>[], layout?: Partial<Layout>): void {
+  const container: Plot = layout ? { data, layout } : { data };
+  tempContainer.push(container);
 }
 
-export function plot(data?: Partial<PlotData>[] | null, cb?: Function): void {
-  if (data) { tempContainer.push(data); }
+export function plot(data?: Partial<PlotData>[] | null, layout?: Partial<Layout>, cb?: Function): void {
+  if (data) {
+    const container: Plot = layout ? { data, layout } : { data };
+    tempContainer.push(container);
+  }
   const id = Object.keys(plotContainer).length;
 
   plotContainer[id] = {
     opened: false,
     pending: false,
-    data: tempContainer
+    plots: tempContainer
   };
   tempContainer = [];
   spawn(() => {
@@ -63,10 +72,10 @@ function spawn(cb: Function) {
     app.get('/data/:id', (req, res) => {
       const requestId = req.params.id;
       const container = plotContainer[requestId];
-      const result = container && container.data;
+      const plots = container && container.plots;
       plotContainer[requestId].opened = true;
       plotContainer[requestId].pending = false;
-      res.send(result);
+      res.send(plots);
       close();
     });
 
