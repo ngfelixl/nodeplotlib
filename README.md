@@ -59,7 +59,46 @@ stack(data);
 plot();
 ```
 
-Be sure to run the `plot()` function without any argument at the end.
+The plot function plots all stacked plots and the plot given by parameter (if there is one).
+Afterwards the temporary container gets cleared and you can call `stack()` and `plot()` again
+without any predefined plots.
+
+The functions are of the form:
+
+```typescript
+plot(data?: Partial<PlotData>[], layout?: Partial<Layout>, cb?: Function): void;
+stack(data?: Partial<PlotData>[], layout?: Partial<Layout>): void;
+clear(): void;
+```
+
+## Layout
+
+In order to style the plot, one is able to pass in the `layout` parameter. With it
+one is able to define styles like *title*, *axis labels*, *subplots* and many more.
+
+Plotly.js provides a nice example for radial plots. Just pass in the plotly.js data
+to the `plot()` function and spawn radial plots.
+
+```typescript
+const data = [{
+  type: 'scatterpolar',
+  r: [1.5, 10, 39, 31, 15, 1.5],
+  theta: ['A','B','C', 'D', 'E', 'A'],
+  fill: 'toself',
+  name: 'Group B'
+}];
+
+const layout = [
+  polar: {
+    radialaxis: {
+      visible: true,
+      range: [0, 50]
+    }
+  }
+];
+
+plot(data, layout);
+```
 
 ## Plotly.js plot types
 
