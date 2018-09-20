@@ -76,6 +76,14 @@ For the different plot types have a look at the [Plotly.js documentation](https:
 
 Any many more different plottypes.
 
+## Behind the scenes
+
+The lib launches an express webserver and opens new tabs for every plot located
+at `http://localhost:8080/plots/:id`. The client side js requests the plot data
+at `http://localhost:8080/data/:id`. After all pending plots are opened in a unique
+tab and all the data is requested, the server shuts down. If you fire another plot
+the server starts again provides your plot and shuts down automatically.
+
 ## Dependencies
 
 - [Expressjs](https://expressjs.com/de/)
