@@ -20,7 +20,7 @@ yarn add nodeplotlib
 
 ### Overview
 
-Use it within NodeJS (TypeScript):
+Use with TypeScript/JavaScript:
 
 ```typescript
 import { plot } from 'nodeplotlib';
@@ -28,13 +28,7 @@ const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
 plot(data);
 ```
 
-Use it in NodeJS (JavaScript):
-
-```javascript
-const plotlib = require('nodeplotlib');
-const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
-plotlib.plot(data);
-```
+If ES5 use `require()` instead of `import`.
 
 ### Details
 
