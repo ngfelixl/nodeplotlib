@@ -1,9 +1,17 @@
 {
   "name": "nodeplotlib",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "NodeJS plot lib on top of plotly.js for easy serverside plot spawns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngfelixl/nodeplotlib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ngfelixl/nodeplotlib/issues"
+  },
+  "homepage": "https://github.com/ngfelixl/nodeplotlib#readme",
   "scripts": {
     "test": "istanbul cover node_modules/mocha/bin/_mocha test/*.js -- -R spec",
     "uglify": "uglifyjs dist/index.js --mangle --compress -o dist/index.min.js",
