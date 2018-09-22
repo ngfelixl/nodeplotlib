@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "NodeJS plot lib on top of plotly.js for easy serverside plot spawns",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,15 +19,16 @@
     "build": "tsc -p src/www && tsc -p src && npm run copy && npm run uglify"
   },
   "keywords": [
-    "node",
     "plot",
     "plotting",
-    "plotly",
     "plotlyjs",
+    "science",
+    "publication-ready",
+    "statistics",
     "easy-to-use",
-    "backend",
-    "spawn",
-    "browser"
+    "no-frontend-prep",
+    "browser",
+    "localhost"
   ],
   "author": "Felix Lemke <flemke.dev@gmail.com> (https://felixlemke.com)",
   "license": "MIT",
