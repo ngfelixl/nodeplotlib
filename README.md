@@ -30,6 +30,8 @@ plot(data);
 
 If ES5 use `require()` instead of `import`.
 
+![Howto animation](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)
+
 ### Details
 
 Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default. But there are awesome plotting libraries for usage in front-end. So this lib targets people like scientists who easily want to create beautiful plots in a time-saving way.
