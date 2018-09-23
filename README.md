@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ngfelixl/nodeplotlib.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplotlib)
 [![Coverage Status](https://coveralls.io/repos/github/ngfelixl/nodeplotlib/badge.svg?branch=master)](https://coveralls.io/github/ngfelixl/nodeplotlib?branch=master)
 [![npm version](https://badge.fury.io/js/nodeplotlib.svg)](https://badge.fury.io/js/nodeplotlib)
+[![npm](https://img.shields.io/npm/dw/nodeplotlib.svg)](https://www.npmjs.com/packages/nodeplotlib)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
 Create publication-ready plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
