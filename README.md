@@ -142,6 +142,11 @@ at `http://localhost:8080/data/:id`. After all pending plots are opened in a uni
 tab and all the data is requested, the server shuts down. If you fire another plot
 the server starts again provides your plot and shuts down automatically.
 
+## Get in contact
+
+- Check the [authors website](https://felixlemke.com)
+- Get in touch via [twitter](https://twitter.com/ngfelixl) or [facebook](https://www.facebook.com/ngfelixlemke/)
+
 ## Dependencies
 
 - [Expressjs](https://expressjs.com/de/)
