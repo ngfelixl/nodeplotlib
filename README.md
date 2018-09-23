@@ -28,7 +28,7 @@ const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
 plot(data);
 ```
 
-If ES5 use `require()` instead of `import`.
+If ES5 use `require()` instead of `import`. Here is a short animation about howto and the results.
 
 ![Howto animation](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)
 
