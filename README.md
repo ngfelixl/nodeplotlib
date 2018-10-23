@@ -9,6 +9,8 @@
 Create publication-ready plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
 without any front-end preparations. Inspired by matplotlib.
 
+[![Animation (View on Github)](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)
+
 ## Installation
 
 ```sh
@@ -31,7 +33,6 @@ plot(data);
 
 If ES5 use `require()` instead of `import`. Here is a short animation about howto and the results.
 
-![Howto animation](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)
 
 ### Details
 
