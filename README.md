@@ -144,6 +144,17 @@ at `http://localhost:8080/data/:id`. After all pending plots are opened in a uni
 tab and all the data is requested, the server shuts down. If you fire another plot
 the server starts again provides your plot and shuts down automatically.
 
+## Contributing
+
+Contributions in all forms are welcome.
+
+## Developers guide
+
+Fork the [Github repository](https://github.com/ngfelixl/nodeplotlib) and clone
+it to your PC. Install the npm dependencies using the `install` command. It installs
+the dependencies and copies plotly types to project source. These won't affect
+the git tree.
+
 ## Get in contact
 
 - Check the [authors website](https://felixlemke.com)
