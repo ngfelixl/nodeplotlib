@@ -24,12 +24,12 @@
     "lint": "tslint --project ./tsconfig.json",
     "coverage": "cat coverage/lcov.info | coveralls",
     "prepare": "npm run clean && npm run types && npm run test && npm run build",
-    "types": "copyfiles -a -s -E -u 2 node_modules/@types/plotly.js/index.d.ts src/models/",
+    "types": "copyfiles -a -s -u 2 node_modules/@types/plotly.js/index.d.ts src/models/",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "precommit": "npm run format && npm run test",
     "copyplotly": "copyfiles -f node_modules/plotly.js/dist/plotly.min.js dist/www/",
-    "bundle-plotlytypes": "copyfiles -a -s -E -u 2 src/models/plotly.js/index.d.ts dist/lib/models/"
+    "bundle-plotlytypes": "copyfiles -a -s -u 2 src/models/plotly.js/index.d.ts dist/lib/models/"
   },
   "keywords": [
     "plot",
