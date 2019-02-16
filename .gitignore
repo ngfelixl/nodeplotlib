@@ -1,2 +1,10 @@
 node_modules/
+dist/
+
 yarn.lock
+
+coverage/
+
+**/plotly.js/**
+
+**/*.tgz

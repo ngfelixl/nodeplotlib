@@ -1,17 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es2017",
     "module": "commonjs",
+    "target": "es5",
     "declaration": true,
     "sourceMap": true,
     "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "removeComments": false,
+    "outDir": "./dist/lib",
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ]
   },
   "exclude": [
-    "./dist"
+    "./dist",
+    "./test",
+    "./src/www"
   ]
 }
