@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "NodeJS frontend-less plotting lib using plotly.js inspired by matplotlib",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -17,19 +17,18 @@
   ],
   "homepage": "https://github.com/ngfelixl/nodeplotlib#readme",
   "scripts": {
-    "build": "npm run clean && webpack && npm run copyplotly && npm run bundle-plotlytypes",
+    "build": "npm run clean && webpack && npm run build-copy-files",
     "clean": "shx rm -rf dist",
     "test": "jest --config jest.config.json --coverage",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint --project ./tsconfig.json",
     "coverage": "cat coverage/lcov.info | coveralls",
-    "prepare": "npm run clean && npm run types && npm run test && npm run build",
-    "types": "copyfiles -a -s -u 2 node_modules/@types/plotly.js/index.d.ts src/models/",
+    "prepare": "npm run clean && npm run prepare-copy-files && npm run test && npm run build ",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "precommit": "npm run format && npm run test",
-    "copyplotly": "copyfiles -f node_modules/plotly.js/dist/plotly.min.js dist/www/",
-    "bundle-plotlytypes": "copyfiles -a -s -u 2 src/models/plotly.js/index.d.ts dist/lib/models/"
+    "build-copy-files": "node ./scripts/build.js",
+    "prepare-copy-files": "node ./scripts/prepare.js"
   },
   "keywords": [
     "plot",
@@ -47,6 +46,7 @@
     "opn": "^5.3.0"
   },
   "devDependencies": {
+    "@types/d3": "^5.7.1",
     "@types/jest": "^24.0.1",
     "@types/node": "^10.10.1",
     "@types/opn": "^5.1.0",
