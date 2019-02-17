@@ -83,29 +83,29 @@ In this section there are some examples to getting started. See the full plotly
 #### Line Plots
 
 ```typescript
-const trace1 = {x: [1, 2], y: [1, 2], type: 'scatter'};
-const trace2 = {x: [3, 4], y: [9, 16], type: 'scatter'};
+const trace1: Plot = {x: [1, 2], y: [1, 2], type: 'scatter'};
+const trace2: Plot = {x: [3, 4], y: [9, 16], type: 'scatter'};
 plot([trace1, trace2]);
 ```
 
 #### Bar Charts
 
 ```typescript
-const trace = {x: [1, 2], y: [1, 2], type: 'bar'};
+const trace: Plot = {x: [1, 2], y: [1, 2], type: 'bar'};
 plot([trace]);
 ```
 
 #### 3D Line Plots
 
 ```typescript
-const trace = {x: [9, 8, 5, 1], y: [1, 2, 4, 8], z: [11, 8, 15, 3], mode: 'lines'};
+const trace: Plot = {x: [9, 8, 5, 1], y: [1, 2, 4, 8], z: [11, 8, 15, 3], type: 'scatter3d'};
 plot([trace]);
 ```
 
 #### 3D Surface Plots
 
 ```typescript
-const trace = {colorscale: 'Viridis', z: [[3, 5, 7, 9], [21, 13, 8, 5]]};
+const trace: Plot = {colorscale: 'Viridis', z: [[3, 5, 7, 9], [21, 13, 8, 5]]};
 plot([trace]);
 ```
 
