@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/ngfelixl/nodeplotlib.svg?branch=master)](https://travis-ci.org/ngfelixl/nodeplotlib)
 [![Coverage Status](https://coveralls.io/repos/github/ngfelixl/nodeplotlib/badge.svg?branch=master)](https://coveralls.io/github/ngfelixl/nodeplotlib?branch=master)
 [![npm version](https://badge.fury.io/js/nodeplotlib.svg)](https://badge.fury.io/js/nodeplotlib)
-[![npm](https://img.shields.io/npm/dt/nodeplotlib.svg)](https://www.npmjs.com/packages/nodeplotlib)
+[![npm](https://img.shields.io/npm/dt/nodeplotlib.svg)](https://www.npmjs.com/package/nodeplotlib)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
 Create publication-ready plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
@@ -33,34 +33,11 @@ plot(data);
 
 If ES5 use `require()` instead of `import`. Here is a short animation about howto and the results.
 
-
 ### Details
 
 Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default. But there are awesome plotting libraries for usage in front-end. So this lib targets people like scientists who easily want to create beautiful plots in a time-saving way.
 
 The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a `clear` function. The `plot()` functions spawns a plot to the browser, if a plotdata is given as an argument. Otherwise it plots all the `stack()`ed plotdata. The arguments are of type Plotly.js `PlotData`. With the `clear()` function the stack container can be cleared.
-
-The following snippet provides an 'reallife' example with tensorflow to get an idea of its simplicity and how to use it.
-
-```typescript
-import { sequential, layers, tensor2d } from '@tensorflow/tfjs';
-import '@tensorflow/tfjs-node-gpu';
-
-// Just import plot
-import { plot } from 'nodeplotlib';
-
-const model = sequential();
-model.add(layers.dense({units: 1, inputShape: [1], name: 'mytensor'}));
-model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
-
-const tensorX = [1, 2, 3, 4];
-const tensorY = [1, 3, 5, 7];
-const xs = tensor2d(tensorX, [4, 1]);
-const ys = tensor2d(tensorY, [4, 1]);
-
-// Spawn a plot in your browser
-plot([{ x: tensorX, y: tensorY, type: 'line' }]);
-```
 
 With the stack function the user is able to print multiple charts on one page (e.g. three times the same plot).
 
@@ -155,13 +132,19 @@ it to your PC. Install the npm dependencies using the `install` command. It inst
 the dependencies and copies plotly types to project source. These won't affect
 the git tree.
 
-## Get in contact
+## Get in touch
 
-- Check the [authors website](https://felixlemke.com)
-- Get in touch via [twitter](https://twitter.com/ngfelixl) or [facebook](https://www.facebook.com/ngfelixlemke/)
+[![twitter](https://img.shields.io/badge/twitter-%40ngfelixl-blue.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ngfelixl)
+[![github](https://img.shields.io/badge/github-%40ngfelixl-blue.svg?logo=github)](https://github.com/ngfelixl)
+
+Hi, I am Felix,
+Software developer and Angular, NgRX contributor
+
+![avatar](https://avatars2.githubusercontent.com/u/24190530?s=200&v=4)
+
+If you like this library, think about giving it a star or follow me on twitter or github or check out my personal
+the [website](https://felixlemke.com).
 
 ## Dependencies
 
-- [Expressjs](https://expressjs.com/de/)
 - [opn](https://www.npmjs.com/package/opn)
-- [Plotly.js](https://plot.ly/javascript/)
