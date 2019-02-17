@@ -6,7 +6,7 @@
 [![npm](https://img.shields.io/npm/dt/nodeplotlib.svg)](https://www.npmjs.com/package/nodeplotlib)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
-Create publication-ready plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
+Library to create top-notch plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
 without any front-end preparations. Inspired by matplotlib.
 
 [![Animation (View on Github)](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)](https://github.com/ngfelixl/nodeplotlib/blob/master/img/animation.gif)
@@ -26,26 +26,30 @@ yarn add nodeplotlib
 Use with TypeScript/JavaScript:
 
 ```typescript
-import { plot } from 'nodeplotlib';
-const data = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
+import { plot, Plot } from 'nodeplotlib';
+const data: Plot[] = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'line'}];
 plot(data);
 ```
 
 If ES5 use `require()` instead of `import`. Here is a short animation about howto and the results.
 
-### Details
+### Detailed usage
 
-Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default. But there are awesome plotting libraries for usage in front-end. So this lib targets people like scientists who easily want to create beautiful plots in a time-saving way.
+Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default.
+But there are awesome plotting libraries for usage in front-end. So this lib targets people like
+scientists who easily want to create beautiful plots in a time-saving way.
 
-The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a `clear` function. The `plot()` functions spawns a plot to the browser, if a plotdata is given as an argument. Otherwise it plots all the `stack()`ed plotdata. The arguments are of type Plotly.js `PlotData`. With the `clear()` function the stack container can be cleared.
+The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a
+`clear` function. The `plot()` functions spawns a plot to the browser, if a plotdata is given as an
+argument. Otherwise it plots all the `stack()`ed plotdata. The arguments are of type `Plot`, which is a
+partial of plotly's `PlotData` type. With the `clear()` function the stack container can be cleared.
 
-With the stack function the user is able to print multiple charts on one page (e.g. three times the same plot).
+With the stack function the user is able to print multiple charts on one page.
 
 ```typescript
-import { plot, stack, clear } from 'nodeplotlib';
-import { PlotData } from 'plotly.js';
+import { plot, stack, clear, Plot } from 'nodeplotlib';
 
-const data: Partial<PlotData>[] = [{
+const data: Plot[] = [{
   x: [ 1, 3, 4, 6, 7],
   y: [ 2, 4, 6, 8, 9],
   type: 'scatter'
@@ -64,21 +68,58 @@ without any predefined plots.
 The functions are of the form:
 
 ```typescript
-plot(data?: Partial<PlotData>[], layout?: Partial<Layout>, cb?: Function): void;
-stack(data?: Partial<PlotData>[], layout?: Partial<Layout>): void;
+import { plot, stack, clear, Plot, Layout } from 'nodeplotlib';
+
+plot(data?: Plot[], layout?: Layout, cb?: Function): void;
+stack(data: Plot[], layout?: Layout): void;
 clear(): void;
 ```
 
-## Layout
+## Quick start
 
-In order to style the plot, one is able to pass in the `layout` parameter. With it
-one is able to define styles like *title*, *axis labels*, *subplots* and many more.
+In this section there are some examples to getting started. See the full plotly
+[cheatsheet](https://images.plot.ly/plotly-documentation/images/plotly_js_cheat_sheet.pdf?_ga=2.2676214.711017137.1550402185-1513144731.1549064935).
 
-Plotly.js provides a nice example for radial plots. Just pass in the plotly.js data
-to the `plot()` function and spawn radial plots.
+#### Line Plots
 
 ```typescript
-const data = [{
+const trace1 = {x: [1, 2], y: [1, 2], type: 'scatter'};
+const trace2 = {x: [3, 4], y: [9, 16], type: 'scatter'};
+plot([trace1, trace2]);
+```
+
+#### Bar Charts
+
+```typescript
+const trace = {x: [1, 2], y: [1, 2], type: 'bar'};
+plot([trace]);
+```
+
+#### 3D Line Plots
+
+```typescript
+const trace = {x: [9, 8, 5, 1], y: [1, 2, 4, 8], z: [11, 8, 15, 3], mode: 'lines'};
+plot([trace]);
+```
+
+#### 3D Surface Plots
+
+```typescript
+const trace = {colorscale: 'Viridis', z: [[3, 5, 7, 9], [21, 13, 8, 5]]};
+plot([trace]);
+```
+
+#### Radial Plots
+
+In order to style the plot, one is able to pass in the `layout` parameter, which internally
+is typeof `Partial<Layout>` from plotly's `Layout`. See the full layout documentation
+[here](https://plot.ly/javascript/#layout-options).
+
+With this parameter one is able to define styles like *title*, *axis labels*,
+*subplots* and many more.
+
+```typescript
+const data: Plot[] = [{
   type: 'scatterpolar',
   r: [1.5, 10, 39, 31, 15, 1.5],
   theta: ['A','B','C', 'D', 'E', 'A'],
@@ -86,7 +127,7 @@ const data = [{
   name: 'Group B'
 }];
 
-const layout = [
+const layout: Layout = [
   polar: {
     radialaxis: {
       visible: true,
@@ -98,28 +139,26 @@ const layout = [
 plot(data, layout);
 ```
 
-## Plotly.js plot types
+## Plot types
 
-For the different plot types have a look at the [Plotly.js documentation](https://plot.ly/javascript/). It provides
-
-| Simple charts              | Advanced charts             |
-| -------------------------- | --------------------------- |
-| Scatter Plots              | 2d density plots            |
-| Line Charts                | Histograms                  |
-| Bar Charts                 | Box-plots                   |
-| Pie Charts                 | Contour plots               |
-| Sankey diagrams            | Heatmaps                    |
-| Tables                     | Radar charts                |
-
-Any many more different plottypes.
+| Simple charts              | Advanced charts             | 3D Plots           |
+| -------------------------- | --------------------------- | ------------------ |
+| Scatter                    | 2d density plots            | Scatter            |
+| Line                       | Histograms                  | Surface            |
+| Bar                        | Box-plots                   | Lines              |
+| Pie charts                 | Contour plots               |                    |
+| Sankey diagrams            | Heatmaps                    |                    |
+| Tables                     | Radar charts                |                    |
 
 ## Behind the scenes
 
-The lib launches an express webserver and opens new tabs for every plot located
-at `http://localhost:8080/plots/:id`. The client side js requests the plot data
-at `http://localhost:8080/data/:id`. After all pending plots are opened in a unique
-tab and all the data is requested, the server shuts down. If you fire another plot
-the server starts again provides your plot and shuts down automatically.
+The lib launches a webserver and opens new tabs for every plot located at
+`http://localhost:8080/plots/:id`. At this address a temporary html template
+file, the nodeplotlib script and plotly.min.js are available. The client side
+js requests the plot data at `http://localhost:8080/data/:id`. After all
+pending plots are opened in a unique tab and all the data is requested, the
+server shuts down. If you fire another plot the server starts again provides
+your plot and shuts down automatically.
 
 ## Contributing
 
@@ -131,6 +170,11 @@ Fork the [Github repository](https://github.com/ngfelixl/nodeplotlib) and clone
 it to your PC. Install the npm dependencies using the `install` command. It installs
 the dependencies and copies plotly types to project source. These won't affect
 the git tree.
+
+## Roadmap
+
+It would be nice to make the library compatible with Observable-streams and update
+the plots in real-time.
 
 ## Get in touch
 

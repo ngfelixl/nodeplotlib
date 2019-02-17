@@ -1,6 +1,6 @@
 import { IPlot } from './plot';
 
-export interface IPlotContainer {
+export interface IPlotsContainer {
   [id: number]: {
     opened: boolean;
     pending: boolean;

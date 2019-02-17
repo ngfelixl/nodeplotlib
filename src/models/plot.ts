@@ -1,6 +1,9 @@
-import { Layout, PlotData } from './plotly.js/index';
+import { Layout as PlotlyLayout, PlotData } from './plotly.js/index';
+
+export type Plot = Partial<PlotData>;
+export type Layout = Partial<PlotlyLayout>;
 
 export interface IPlot {
-  data: Array<Partial<PlotData>>;
-  layout?: Partial<Layout>;
+  data: Plot[];
+  layout?: Layout;
 }

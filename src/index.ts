@@ -1,2 +1,2 @@
 export { plot, clear, stack } from './plot';
-export { IPlot } from './models/index';
+export { Plot, Layout } from './models/index';
