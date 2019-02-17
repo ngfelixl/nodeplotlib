@@ -1,12 +1,12 @@
-import { IPlot, IPlotContainer } from './models/index';
-import { Layout, PlotData } from './models/plotly.js/index';
+import { IPlot, IPlotsContainer } from './models/index';
+import { Layout, Plot } from './models/index';
 import { Server } from './server';
 
 
 const server = new Server(8080);
 
 export let plots: IPlot[] = [];
-export const plotContainer: IPlotContainer = {};
+export const plotContainer: IPlotsContainer = {};
 
 /**
  * Clears all stacked plots.
@@ -21,7 +21,7 @@ export function clear(): void {
  * @param data
  * @param layout
  */
-export function stack(data: Array<Partial<PlotData>>, layout?: Partial<Layout>): void {
+export function stack(data: Plot[], layout?: Layout): void {
   const container: IPlot = layout ? { data, layout } : { data };
   plots.push(container);
 }
@@ -32,7 +32,7 @@ export function stack(data: Array<Partial<PlotData>>, layout?: Partial<Layout>):
  * @param layout
  * @param cb
  */
-export function plot(data?: Array<Partial<PlotData>> | null, layout?: Partial<Layout>, cb?: (id: number) => void): void {
+export function plot(data?: Plot[] | null, layout?: Layout, cb?: (id: number) => void): void {
   if (data) {
     stack(data, layout);
   }

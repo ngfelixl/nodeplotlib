@@ -1,2 +1,2 @@
-export * from './plot-container';
+export * from './plots-container';
 export * from './plot';

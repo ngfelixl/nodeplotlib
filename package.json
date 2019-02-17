@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "NodeJS frontend-less plotting lib using plotly.js inspired by matplotlib",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
