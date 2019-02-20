@@ -10,4 +10,11 @@ describe('clear', () => {
 
     expect(lib.plots).toEqual([]);
   });
+
+  it('should be clearable multiple times', () => {
+    lib.clear();
+    lib.clear();
+
+    expect(lib.plots).toEqual([]);
+  });
 });

@@ -19,7 +19,7 @@ export class Server {
    * and opens a new browser window targetting the webservers
    * data address.
    */
-  public spawn(plotsContainer: IPlotsContainer, cb?: () => void) {
+  public spawn(plotsContainer: IPlotsContainer) {
     this.plotsContainer = plotsContainer;
 
     if (!this.instance.address()) {
@@ -27,17 +27,13 @@ export class Server {
     }
 
     this.openBrowserWindow();
-
-    if (cb) {
-      cb();
-    }
   }
 
   /**
    * Closes the webserver and clears the plots container.
    */
   public clean() {
-    if (this.instance) {
+    if (this.instance.address()) {
       this.instance.close();
     }
     this.plotsContainer = {};

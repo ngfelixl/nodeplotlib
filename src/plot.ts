@@ -32,7 +32,7 @@ export function stack(data: Plot[], layout?: Layout): void {
  * @param layout
  * @param cb
  */
-export function plot(data?: Plot[] | null, layout?: Layout, cb?: (id: number) => void): void {
+export function plot(data?: Plot[] | null, layout?: Layout): void {
   if (data) {
     stack(data, layout);
   }
@@ -45,9 +45,5 @@ export function plot(data?: Plot[] | null, layout?: Layout, cb?: (id: number) =>
   };
   plots = [];
 
-  server.spawn(plotContainer, () => {
-    if (cb) {
-      cb(id);
-    }
-  });
+  server.spawn(plotContainer);
 }

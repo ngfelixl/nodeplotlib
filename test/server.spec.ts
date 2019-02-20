@@ -53,6 +53,67 @@ describe('Server', () => {
     });
   });
 
+  it('should serve the website and return 404 if html file not found', (done) => {
+    server.spawn({0: {
+      opened: false,
+      pending: false,
+      plots: [{data: [{ x: [1], y: [2]}]}]
+    }});
+
+    request(`http://localhost:8080/plots/0/index.html`, (err, response, body) => {
+      expect(response.statusCode).toBe(404);
+      done();
+    });
+  });
+
+  it('should serve the nodeplotlib script and return 404 if file not found', (done) => {
+    server.spawn({0: {
+      opened: false,
+      pending: false,
+      plots: [{data: [{ x: [1], y: [2]}]}]
+    }});
+
+    request(`http://localhost:8080/plots/0/nodeplotlib.min.js`, (err, response, body) => {
+      expect(response.statusCode).toBe(404);
+      done();
+    });
+  });
+
+  it('should serve the plotly.min.js script and return 404 if file not found', (done) => {
+    server.spawn({0: {
+      opened: false,
+      pending: false,
+      plots: [{data: [{ x: [1], y: [2]}]}]
+    }});
+
+    request(`http://localhost:8080/plots/0/plotly.min.js`, (err, response, body) => {
+      expect(response.statusCode).toBe(404);
+      done();
+    });
+  });
+
+  it('should not close the webserver, if one plot hasn\'t got its data', (done) => {
+    server.spawn({0: {
+      opened: false,
+      pending: false,
+      plots: [{data: [{ x: [1], y: [2]}]}]
+    },
+    1: {
+      opened: false,
+      pending: false,
+      plots: [{data: [{ x: [1], y: [3]}]}]
+    }});
+
+    request(`http://localhost:8080/data/0`, (err, response, body) => {
+      expect(JSON.parse(body)).toEqual([{data: [{ x: [1], y: [2]}]}]);
+
+      request(`http://localhost:8080/data/1`, (err1, response1, body1) => {
+        expect(JSON.parse(body1)).toEqual([{data: [{ x: [1], y: [3]}]}]);
+        done();
+      });
+    });
+  });
+
   it('should return 404 if routes not matching', (done) => {
     const data = {0: {
       opened: false,
@@ -67,14 +128,6 @@ describe('Server', () => {
       expect(response.body).toBe('Server address not found');
       done();
     });
-  });
-
-  it('should work with callback', () => {
-    const mock = jest.fn().mockImplementation(() => null);
-
-    server.spawn({}, mock);
-
-    expect(mock).toHaveBeenCalledTimes(1);
   });
 
   afterEach(() => {
