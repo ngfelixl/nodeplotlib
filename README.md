@@ -71,7 +71,7 @@ The functions are of the form:
 ```typescript
 import { plot, stack, clear, Plot, Layout } from 'nodeplotlib';
 
-plot(data?: Plot[], layout?: Layout, cb?: Function): void;
+plot(data?: Plot[], layout?: Layout): void;
 stack(data: Plot[], layout?: Layout): void;
 clear(): void;
 ```
