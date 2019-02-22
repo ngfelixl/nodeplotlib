@@ -116,4 +116,9 @@ describe('Server', () => {
     server.clean();
     server = null;
   });
+
+  // afterAll(() => {
+  //   console.log((process as any)._getActiveRequests());
+  //   console.log((process as any)._getActiveHandles()[0]);
+  // });
 });

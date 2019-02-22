@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run clean && webpack && npm run build-copy-files",
     "clean": "shx rm -rf dist",
-    "test": "jest --config jest.config.json --coverage --detectOpenHandles",
+    "test": "jest --config jest.config.json --coverage --maxWorkers=15",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint --project ./tsconfig.json",
     "coverage": "cat coverage/lcov.info | coveralls",

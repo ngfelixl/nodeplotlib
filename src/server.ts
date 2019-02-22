@@ -1,5 +1,6 @@
 import { readFile } from 'fs';
 import { createServer, IncomingMessage, Server as HttpServer, ServerResponse } from 'http';
+import { Socket } from 'net';
 import opn from 'opn';
 import { join } from 'path';
 import { IPlotsContainer } from './models';
@@ -8,10 +9,21 @@ export class Server {
   private instance: HttpServer;
   private plotsContainer: IPlotsContainer = {};
   private port: number;
+  private sockets: {[id: number]: Socket} = {};
+  private nextSocketID = 0;
 
   constructor(port: number) {
     this.port = port;
     this.instance = this.createServer();
+
+    this.instance.on('connection', (socket: Socket) => {
+      const id = this.nextSocketID++;
+      this.sockets[id] = socket;
+
+      socket.on('close', () => {
+        delete this.sockets[id];
+      });
+    });
   }
 
   /**
@@ -30,12 +42,18 @@ export class Server {
   }
 
   /**
-   * Closes the webserver and clears the plots container.
+   * Closes the webserver, destroys all connected sockets
+   * and clears the plots container.
    */
   public clean() {
     if (this.instance.address()) {
       this.instance.close();
     }
+
+    for (const socket of Object.values(this.sockets)) {
+      socket.destroy();
+    }
+
     this.plotsContainer = {};
   }
 
@@ -86,7 +104,7 @@ export class Server {
   }
 
   /**
-   * 
+   * Serves the website at http://localhost:PORT/plots/:id/index.html
    * @param req 
    * @param res 
    */
