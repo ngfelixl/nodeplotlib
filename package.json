@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "NodeJS frontend-less plotting lib using plotly.js inspired by matplotlib",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run clean && webpack && npm run build-copy-files",
     "clean": "shx rm -rf dist",
-    "test": "jest --config jest.config.json --coverage",
+    "test": "jest --config jest.config.json --coverage --detectOpenHandles",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint --project ./tsconfig.json",
     "coverage": "cat coverage/lcov.info | coveralls",

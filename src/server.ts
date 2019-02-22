@@ -141,7 +141,7 @@ export class Server {
       .reduce((a, b) => a && b.opened, true);
 
     if (this.instance && !pending && opened) {
-      this.instance.close();
+      this.clean();
     }
   }
 }

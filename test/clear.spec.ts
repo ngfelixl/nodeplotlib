@@ -1,20 +1,20 @@
-import * as lib from '../src/plot';
+import { clear, plots } from '../src/plot';
 
 describe('clear', () => {
   beforeEach(() => {
-    lib.plots.push('fdsa' as any);
+    plots.push('test' as any);
   });
 
   it('should clear the plots array', () => {
-    lib.clear();
+    clear();
 
-    expect(lib.plots).toEqual([]);
+    expect(plots).toEqual([]);
   });
 
   it('should be clearable multiple times', () => {
-    lib.clear();
-    lib.clear();
+    clear();
+    clear();
 
-    expect(lib.plots).toEqual([]);
+    expect(plots).toEqual([]);
   });
 });
