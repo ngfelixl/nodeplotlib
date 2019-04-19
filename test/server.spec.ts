@@ -2,7 +2,7 @@ import opn from 'opn';
 import request from 'request';
 import { Server } from '../src/server';
 
-const port = 8080;
+const port = Number(process.env.PORT) || 8080;
 const validData = {
   opened: false,
   pending: false,

@@ -2,8 +2,8 @@ import { IPlot, IPlotsContainer } from './models/index';
 import { Layout, Plot } from './models/index';
 import { Server } from './server';
 
-
-const server = new Server(8080);
+const port = Number(process.env.PORT) || 8080;
+const server = new Server(port);
 
 export let plots: IPlot[] = [];
 export const plotContainer: IPlotsContainer = {};
