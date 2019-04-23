@@ -161,6 +161,8 @@ pending plots are opened in a unique tab and all the data is requested, the
 server shuts down. If you fire another plot the server starts again provides
 your plot and shuts down automatically.
 
+Another port can be provided via PORT environment variable.
+
 ## Contributing
 
 Contributions in all forms are welcome.
