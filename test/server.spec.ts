@@ -1,4 +1,4 @@
-import opn from 'opn';
+import { exec } from 'child_process';
 import request from 'request';
 import { Server } from '../src/server';
 
@@ -9,7 +9,7 @@ const validData = {
   plots: [{data: [{ x: [1], y: [2]}]}]
 };
 
-jest.mock('opn');
+jest.mock('child_process');
 jest.mock('fs', () => ({readFile: (path: any, options: any, callback: (err: any, data: any) => void) => {
   callback('Error', null);
 }}));
@@ -20,7 +20,6 @@ describe('Server', () => {
   beforeEach(() => {
     server = new Server(port);
   });
-
 
   it('should instantiate', () => {
     expect(server).toBeTruthy();
@@ -33,7 +32,7 @@ describe('Server', () => {
       plots: []
     }});
 
-    expect(opn).toHaveBeenCalledTimes(1);
+    expect(exec).toHaveBeenCalledTimes(1);
   });
 
   it('should serve the data', (done) => {
@@ -116,9 +115,4 @@ describe('Server', () => {
     server.clean();
     server = null;
   });
-
-  // afterAll(() => {
-  //   console.log((process as any)._getActiveRequests());
-  //   console.log((process as any)._getActiveHandles()[0]);
-  // });
 });

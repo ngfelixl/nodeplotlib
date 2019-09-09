@@ -1,7 +1,8 @@
+import { exec } from 'child_process';
 import { readFile } from 'fs';
 import { createServer, IncomingMessage, Server as HttpServer, ServerResponse } from 'http';
 import { Socket } from 'net';
-import opn from 'opn';
+import { type } from 'os';
 import { join } from 'path';
 import { IPlotsContainer } from './models';
 
@@ -66,8 +67,16 @@ export class Server {
     for (const plotEntry of Object.entries(this.plotsContainer)) {
       if (!plotEntry[1].opened && !plotEntry[1].pending) {
         plotEntry[1].pending = true;
-        opn(`http://localhost:${this.port}/plots/${plotEntry[0]}/index.html`);
+        this.openWindow(`http://localhost:${this.port}/plots/${plotEntry[0]}/index.html`);
       }
+    }
+  }
+
+  private openWindow(location: string) {
+    switch (type()) {
+      case 'Linux': exec(`xdg-open ${location}`); break;
+      case 'Darwin': exec(`open ${location}`); break;
+      case 'Windows_NT': exec(`start ${location}`); break;
     }
   }
 

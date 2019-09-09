@@ -9,7 +9,7 @@ const validData = {
   plots: [{data: [{ x: [1], y: [2]}]}]
 };
 
-jest.mock('opn');
+jest.mock('child_process');
 jest.mock('fs', () => ({readFile: (path: any, options: any, callback: (err: any, data: any) => void) => {
   switch (path) {
     case join(__dirname, '..', 'www', 'index.html'): callback(null, 'index.html data'); break;
