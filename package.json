@@ -23,8 +23,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint --project ./tsconfig.json",
     "coverage": "cat coverage/lcov.info | coveralls",
-    "prepare": "npm run clean && npm run prepare-copy-files && npm run test && npm run build ",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepare": "npm run clean && npm run prepare-copy-files && npm run build ",
+    "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
     "build-copy-files": "node ./scripts/build.js",
     "prepare-copy-files": "node ./scripts/prepare.js"
