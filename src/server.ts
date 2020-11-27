@@ -85,8 +85,9 @@ export class Server {
    */
   private createServer(): HttpServer {
     return createServer((req, res) => {
-      this.serveData(req, res);
-      this.serveWebsite(req, res);
+      if (!this.serveData(req, res)) {
+        this.serveWebsite(req, res); // only serve website if request was not served from serveData
+      }
     });
   }
 
@@ -94,7 +95,8 @@ export class Server {
    * Serves the plot data at /data/:id of the container[id].
    * It markes the container as opened and not pending anymore.
    * @param req 
-   * @param res 
+   * @param res
+   * @returns {boolean} - Whether the request was served or not
    */
   private serveData(req: IncomingMessage, res: ServerResponse) {
     if (req && req.url && req.url.match(/data\/[0-9]+/)) {
@@ -109,7 +111,9 @@ export class Server {
 
       res.end(JSON.stringify(temporaryPlots));
       this.close();
+      return true; // request successfully server
     }
+    return false; // request not served
   }
 
   /**
