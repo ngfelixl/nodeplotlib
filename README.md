@@ -179,15 +179,9 @@ the git tree.
 It would be nice to make the library compatible with Observable-streams and update
 the plots in real-time.
 
-## Get in touch
+## Contributors
 
-[![twitter](https://img.shields.io/badge/twitter-%40ngfelixl-blue.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ngfelixl)
-[![github](https://img.shields.io/badge/github-%40ngfelixl-blue.svg?logo=github)](https://github.com/ngfelixl)
+<a href="https://github.com/ngfelixl"><img src="https://avatars2.githubusercontent.com/u/24190530" title="ngfelixl" width="100" height="100"></a>
+<a href="https://github.com/mitsos1os"><img src="https://avatars3.githubusercontent.com/u/8208733" title="mitsos1os" width="100" height="100"></a>
+<a href="https://github.com/medved-nsk"><img src="https://avatars1.githubusercontent.com/u/6310906" title="medved-nsk" width="100" height="100"></a>
 
-Hi, I am Felix,<br>
-Senior Angular developer and Angular, RxJS and NgRX contributor.
-
-![avatar](https://avatars2.githubusercontent.com/u/24190530?s=200&v=4)
-
-If you like this library, think about giving it a star or follow me on twitter or github or check out my personal
-the [website](https://felixlemke.dev).
