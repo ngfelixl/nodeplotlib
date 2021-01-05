@@ -14,7 +14,7 @@ describe('stack', () => {
   });
 
   it('should stack data with layout', () => {
-    stack(validData, {});
+    stack(validData, {} as any);
 
     expect(plots.length).toBe(1);
   });
