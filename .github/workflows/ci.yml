@@ -1,12 +1,21 @@
-language : node_js
-node_js :
- - 14
-install:
- - npm install
-script:
- - npm run build
- - npm run lint
- - npm run test
+name: Node.js CI
 
- # Send coverage data to Coveralls
-after_script: npm run coverage
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - run: npm ci
+    - run: npm run lint
+    - run: npm run build
+    - run: npm run test
+      env:
+        CI: true
