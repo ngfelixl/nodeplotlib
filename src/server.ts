@@ -10,7 +10,7 @@ export class Server {
   private instance: HttpServer;
   private plotsContainer: IPlotsContainer = {};
   private port: number;
-  private sockets: {[id: number]: Socket} = {};
+  private sockets: { [id: number]: Socket } = {};
   private nextSocketID = 0;
 
   constructor(port: number) {
@@ -74,9 +74,15 @@ export class Server {
 
   private openWindow(location: string) {
     switch (type()) {
-      case 'Linux': exec(`xdg-open ${location}`); break;
-      case 'Darwin': exec(`open ${location}`); break;
-      case 'Windows_NT': exec(`start ${location}`); break;
+      case 'Linux':
+        exec(`xdg-open ${location}`);
+        break;
+      case 'Darwin':
+        exec(`open ${location}`);
+        break;
+      case 'Windows_NT':
+        exec(`start ${location}`);
+        break;
     }
   }
 
@@ -84,8 +90,8 @@ export class Server {
    * Creates the Webserver instance
    */
   private createServer(): HttpServer {
-    return createServer((req, res) => {
-      if (!this.serveData(req, res)) {
+    return createServer(async (req, res) => {
+      if (!(await this.serveData(req, res))) {
         this.serveWebsite(req, res); // only serve website if request was not served from serveData
       }
     });
@@ -94,15 +100,15 @@ export class Server {
   /**
    * Serves the plot data at /data/:id of the container[id].
    * It markes the container as opened and not pending anymore.
-   * @param req 
+   * @param req
    * @param res
    * @returns {boolean} - Whether the request was served or not
    */
-  private serveData(req: IncomingMessage, res: ServerResponse) {
+  private async serveData(req: IncomingMessage, res: ServerResponse) {
     if (req && req.url && req.url.match(/data\/[0-9]+/)) {
       const segments = req.url.split('/');
       const id = +segments[segments.length - 1];
-      
+
       const container = this.plotsContainer[id];
       const temporaryPlots = container && container.plots;
 
@@ -110,7 +116,14 @@ export class Server {
       this.plotsContainer[id].pending = false;
 
       res.end(JSON.stringify(temporaryPlots));
-      this.close();
+      // Wait before closing the server
+      // to avoid https://github.com/ngfelixl/nodeplotlib/issues/20
+      await new Promise<void>(resolve =>
+        res.on('finish', () => {
+          this.close();
+          resolve();
+        }),
+      );
       return true; // request successfully server
     }
     return false; // request not served
@@ -118,8 +131,8 @@ export class Server {
 
   /**
    * Serves the website at http://localhost:PORT/plots/:id/index.html
-   * @param req 
-   * @param res 
+   * @param req
+   * @param res
    */
   private serveWebsite(req: IncomingMessage, res: ServerResponse) {
     if (req && req.url && req.url.match(/plots\/[0-9]+\/index.html/)) {
@@ -136,7 +149,7 @@ export class Server {
         res.writeHead(200);
         res.end(file);
       });
-    } else if (req && req.url && (req.url.match(/nodeplotlib.min.js/) || req.url && req.url.match(/plotly.min.js/))) {
+    } else if (req && req.url && (req.url.match(/nodeplotlib.min.js/) || (req.url && req.url.match(/plotly.min.js/)))) {
       const segments = req.url.split('/');
       const script = segments[segments.length - 1];
 
@@ -166,10 +179,8 @@ export class Server {
    * and all plots were opened
    */
   private close() {
-    const pending = Object.values(this.plotsContainer)
-      .reduce((a, b) => a || b.pending, false);
-    const opened = Object.values(this.plotsContainer)
-      .reduce((a, b) => a && b.opened, true);
+    const pending = Object.values(this.plotsContainer).reduce((a, b) => a || b.pending, false);
+    const opened = Object.values(this.plotsContainer).reduce((a, b) => a && b.opened, true);
 
     if (this.instance && !pending && opened) {
       this.clean();
