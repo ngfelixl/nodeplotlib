@@ -103,7 +103,7 @@ describe('Server', () => {
     });
   });
 
-  it('should not close the webserver on huge data', done => {
+  it('should not close webserver until plot data is entirely transferred', done => {
     const elements = 100000;
     const plot = [{ data: [{ x: new Array(elements).fill(1), y: new Array(elements).fill(1) }] }];
     server.spawn({
