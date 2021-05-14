@@ -128,14 +128,14 @@ const data: Plot[] = [{
   name: 'Group B'
 }];
 
-const layout: Layout = [
+const layout: Layout = {
   polar: {
     radialaxis: {
       visible: true,
       range: [0, 50]
     }
   }
-];
+};
 
 plot(data, layout);
 ```
