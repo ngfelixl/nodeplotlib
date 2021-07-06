@@ -1,5 +1,5 @@
 let containers = 0;
-      
+
 window.addEventListener('load', () => {
   const element = document.getElementById('container');
   const plotId = element && element.dataset.plotid;
@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     if (xhr.readyState === 4) {
       if (xhr.responseText) {
         const stack = JSON.parse(xhr.responseText);
-  
+
         if (element) {
           containers = stack.length;
           for (let i = 0; i < stack.length; i++) {
@@ -31,7 +31,7 @@ window.addEventListener('load', () => {
 
 window.addEventListener('resize', () => {
   const update = {
-    width: window.innerWidth
+    width: window.innerWidth,
   };
 
   for (let i = 0; i < containers; i++) {
