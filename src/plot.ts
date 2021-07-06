@@ -45,7 +45,7 @@ export function plot(data?: Plot[] | null, layout?: Layout): void {
   plotContainer[id] = {
     opened: false,
     pending: false,
-    plots
+    plots,
   };
   plots = [];
 
