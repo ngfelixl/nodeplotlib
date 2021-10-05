@@ -11,7 +11,11 @@ const validData = {
 
 jest.mock('child_process');
 jest.mock('fs', () => ({
-  readFile: (path: any, options: any, callback: (err: any, data: any) => void) => {
+  readFile: (
+    path: any,
+    options: any,
+    callback: (err: any, data: any) => void
+  ) => {
     callback('Error', null);
   },
 }));
@@ -39,7 +43,7 @@ describe('Server', () => {
     expect(exec).toHaveBeenCalledTimes(1);
   });
 
-  it('should serve the data', done => {
+  it('should serve the data', (done) => {
     server.spawn({ 0: validData });
 
     request(`http://localhost:${port}/data/0`, (err, response, body) => {
@@ -48,7 +52,7 @@ describe('Server', () => {
     });
   });
 
-  it('should spawn two times but listen just once', done => {
+  it('should spawn two times but listen just once', (done) => {
     const data = { 0: validData };
 
     server.spawn(data);
@@ -60,37 +64,54 @@ describe('Server', () => {
     });
   });
 
-  it('should serve the website and return 404 if html file not found', done => {
+  it('should serve the website and return 404 if html file not found', (done) => {
     server.spawn({ 0: validData });
 
-    request(`http://localhost:${port}/plots/0/index.html`, (err, response, body) => {
-      expect(response.statusCode).toBe(404);
-      done();
-    });
+    request(
+      `http://localhost:${port}/plots/0/index.html`,
+      (err, response, body) => {
+        expect(response.statusCode).toBe(404);
+        done();
+      }
+    );
   });
 
-  it('should serve the nodeplotlib script and return 404 if file not found', done => {
+  it('should serve the nodeplotlib script and return 404 if file not found', (done) => {
     server.spawn({ 0: validData });
 
-    request(`http://localhost:${port}/plots/0/nodeplotlib.min.js`, (err, response, body) => {
-      expect(response.statusCode).toBe(404);
-      done();
-    });
+    request(
+      `http://localhost:${port}/plots/0/nodeplotlib.min.js`,
+      (err, response, body) => {
+        expect(response.statusCode).toBe(404);
+        done();
+      }
+    );
   });
 
-  it('should serve the plotly.min.js script and return 404 if file not found', done => {
+  it('should serve the plotly.min.js script and return 404 if file not found', (done) => {
     server.spawn({ 0: validData });
 
-    request(`http://localhost:${port}/plots/0/plotly.min.js`, (err, response, body) => {
-      expect(response.statusCode).toBe(404);
-      done();
-    });
+    request(
+      `http://localhost:${port}/plots/0/plotly.min.js`,
+      (err, response, body) => {
+        expect(response.statusCode).toBe(404);
+        done();
+      }
+    );
   });
 
-  it("should not close the webserver, if one plot hasn't got its data", done => {
+  it("should not close the webserver, if one plot hasn't got its data", (done) => {
     server.spawn({
-      0: { pending: false, opened: false, plots: [{ data: [{ x: [1], y: [2] }] }] },
-      1: { pending: false, opened: false, plots: [{ data: [{ x: [1], y: [3] }] }] },
+      0: {
+        pending: false,
+        opened: false,
+        plots: [{ data: [{ x: [1], y: [2] }] }],
+      },
+      1: {
+        pending: false,
+        opened: false,
+        plots: [{ data: [{ x: [1], y: [3] }] }],
+      },
     });
 
     request(`http://localhost:${port}/data/0`, (err, response, body) => {
@@ -103,9 +124,15 @@ describe('Server', () => {
     });
   });
 
-  it('should not close webserver until plot data is entirely transferred', done => {
+  it('should not close webserver until plot data is entirely transferred', (done) => {
     const elements = 100000;
-    const plot = [{ data: [{ x: new Array(elements).fill(1), y: new Array(elements).fill(1) }] }];
+    const plot = [
+      {
+        data: [
+          { x: new Array(elements).fill(1), y: new Array(elements).fill(1) },
+        ],
+      },
+    ];
     server.spawn({
       0: { pending: false, opened: false, plots: plot },
     });
@@ -116,7 +143,7 @@ describe('Server', () => {
     });
   });
 
-  it('should return 404 if routes not matching', done => {
+  it('should return 404 if routes not matching', (done) => {
     const data = { 0: validData };
 
     server.spawn(data);

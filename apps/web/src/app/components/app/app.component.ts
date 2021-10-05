@@ -4,6 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'npl-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
