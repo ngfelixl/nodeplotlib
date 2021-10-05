@@ -6,7 +6,7 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "nx serve",
-    "build": "nx build",
+    "build": "nx build && zx ./tools/copy-files.mjs",
     "test": "nx test"
   },
   "private": true,
@@ -56,6 +56,7 @@
     "prettier": "^2.3.1",
     "request": "^2.88.2",
     "ts-jest": "27.0.3",
-    "typescript": "~4.3.5"
+    "typescript": "~4.3.5",
+    "zx": "^4.2.0"
   }
 }
