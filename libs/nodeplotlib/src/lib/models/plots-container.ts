@@ -1,9 +1,9 @@
-import { IPlot } from './plot';
+import { PlotData } from './plot';
 
-export interface IPlotsContainer {
+export interface PlotsContainer {
   [id: number]: {
     opened: boolean;
     pending: boolean;
-    plots: IPlot[];
+    plots: PlotData[];
   };
 }
