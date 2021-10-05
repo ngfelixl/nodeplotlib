@@ -8,12 +8,15 @@ describe('plot', () => {
   });
 
   it('should throw an error if array length is 0', () => {
-    expect(() => { plot([]) })
-        .toThrow(new RegExp('Plot data must be an array with at least 1 element'))
+    expect(() => {
+      plot([]);
+    }).toThrow(
+      new RegExp('Plot data must be an array with at least 1 element')
+    );
   });
 
   it('should spawn the server if data is valid', () => {
-    plot([{x: [1], y: [1], type: 'line' as any}]);
+    plot([{ x: [1], y: [1], type: 'line' as any }]);
   });
 
   /* it('should stack data and call "spawn" once when using with data', () => {
@@ -21,7 +24,7 @@ describe('plot', () => {
   }); */
 
   it('should clear the temporary plots array', () => {
-    stack([{x: [1], y: [2], type: 'line' as any}]);
+    stack([{ x: [1], y: [2], type: 'line' as any }]);
     expect(plots.length).toBe(1);
 
     plot();
@@ -29,7 +32,8 @@ describe('plot', () => {
   });
 
   it('should throw an error if layout is not an object', () => {
-    expect(() => { plot([{x: [1], y: [1], type: 'line' as any}], 'test' as any) })
-        .toThrow(new RegExp('Layout must be an object'));
+    expect(() => {
+      plot([{ x: [1], y: [1], type: 'line' as any }], 'test' as any);
+    }).toThrow(new RegExp('Layout must be an object'));
   });
 });

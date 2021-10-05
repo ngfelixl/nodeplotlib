@@ -1,2 +1,2 @@
-export { plot, clear, stack } from './lib/plot';
+export { plot, clear, stack } from './lib/nodeplotlib';
 export { Plot, Layout } from './lib/models';
