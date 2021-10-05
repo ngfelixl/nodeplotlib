@@ -1,41 +1,56 @@
-import * as express from 'express';
-import { Server } from 'http';
-import { Layout, Plot } from './models';
+import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { exec } from 'child_process';
 import { type } from 'os';
-import { AddressInfo } from 'net';
-import { join } from 'path';
-let server: Server | null = null;
-const appFolder = join(__dirname, '..', '..', 'web');
+import { addPlot$ } from './+state/actions';
+import { Layout, Plot } from './models';
+import { NodeplotlibModule } from './nodeplotlib.module';
+let app: INestApplication|null = null;
 
-export function stack(data: Plot[], layout?: Layout) {
-  //
-}
 
 /**
- * Start the webserver
- * Open the browser
+ * Plots the registered plots to a browser.
+ * @param data
+ * @param layout
+ * @param cb
  */
-export function plot(data?: Plot[] | null, layout?: Layout) {
-  clear();
+export async function plot(data?: Plot[] | null, layout?: Layout) {
+  addPlot$.next({ data, layout });
 
-  const app = express();
-  app.use('/', express.static(appFolder));
-
-  app.get('*', (req, res) => {
-    res.status(200).sendFile(`/`, { root: appFolder });
-  });
-  server = app.listen(0, () => {
-    console.log('Nodeplotlib server active');
-    openWindow(`http://localhost:${(server.address() as AddressInfo).port}`);
-  });
+  await bootstrap();
+  const address = app.getHttpServer().address();
+  openWindow(`http://localhost:${address.port}`);
 }
 
-export function clear() {
-  if (server) {
-    server.close();
+
+/**
+ * Stacks plot data to a stack. When executing `plot`
+ * the stack will also be plotted.
+ * @param data
+ * @param layout
+ */
+export function stack(data: Plot[], layout?: Layout) {
+  addPlot$.next({ data, layout });
+}
+
+
+/**
+ * Clears all stacked plots and shuts down the server if it
+ * exists.
+ */
+export async function clear() {
+  if (app) {
+    await app.close();
   }
 }
+
+
+async function bootstrap() {
+  await clear();
+  app = await NestFactory.create(NodeplotlibModule);
+  await app.listen(0);
+}
+
 
 function openWindow(location: string) {
   switch (type()) {
