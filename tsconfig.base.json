@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@npl/interfaces": ["libs/interfaces/src/index.ts"],
+      "@npl/server": ["libs/server/src/index.ts"],
       "nodeplotlib": ["libs/nodeplotlib/src/index.ts"]
     }
   },

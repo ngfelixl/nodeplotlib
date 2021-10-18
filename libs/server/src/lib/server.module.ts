@@ -13,4 +13,4 @@ import { PlotsService } from './plots/plots.service';
   controllers: [PlotsController],
   providers: [PlotsService],
 })
-export class NodeplotlibModule {}
+export class ServerModule {}
