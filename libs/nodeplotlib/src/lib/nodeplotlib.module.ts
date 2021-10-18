@@ -10,11 +10,7 @@ import { PlotsService } from './plots/plots.service';
       rootPath: join(__dirname, '..', '..', 'web'),
     }),
   ],
-  controllers: [
-    PlotsController
-  ],
-  providers: [
-    PlotsService
-  ],
+  controllers: [PlotsController],
+  providers: [PlotsService],
 })
 export class NodeplotlibModule {}

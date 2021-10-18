@@ -1,6 +1,57 @@
 {
   "version": 1,
   "projects": {
+    "dev-server": {
+      "root": "apps/dev-server",
+      "sourceRoot": "apps/dev-server/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/dev-server",
+            "main": "apps/dev-server/src/main.ts",
+            "tsConfig": "apps/dev-server/tsconfig.app.json",
+            "assets": ["apps/dev-server/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/dev-server/src/environments/environment.ts",
+                  "with": "apps/dev-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "dev-server:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/dev-server/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/dev-server"],
+          "options": {
+            "jestConfig": "apps/dev-server/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "interfaces": {
       "root": "libs/interfaces",
       "sourceRoot": "libs/interfaces/src",

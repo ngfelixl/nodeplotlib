@@ -1,4 +1,14 @@
 <mat-toolbar color="primary">
-  <button mat-flat-button>NodePlotLib</button>
+  <span class="brand">
+    <button mat-flat-button color="primary">NodePlotLib</button>
+  </span>
+  <span>
+    <a href="https://github.com/ngfelixl/nodeplotlib" target="_blank"
+      ><button mat-icon-button>
+        <img src="/assets/github-light-32px.png" /></button
+    ></a>
+  </span>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet class="main-router-outlet"></router-outlet>
+</main>
