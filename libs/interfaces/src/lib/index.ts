@@ -1,5 +1,3 @@
-export * from 'plotly.js';
-
 export { DataTransferObject } from './dto';
 
 export { Stack } from './stack';

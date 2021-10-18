@@ -11,6 +11,8 @@ import { StackComponent } from './components/stack/stack.component';
 import { StacksComponent } from './components/stacks/stacks.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { PlotsService } from './services/plots.service';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { PlotsService } from './services/plots.service';
     MatButtonModule,
     MatToolbarModule,
     HttpClientModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [PlotsService],
   bootstrap: [AppComponent],

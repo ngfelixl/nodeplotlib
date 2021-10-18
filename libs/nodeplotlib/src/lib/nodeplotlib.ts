@@ -5,9 +5,8 @@ import { type } from 'os';
 import { Layout, Plot } from '@npl/interfaces';
 import { NodeplotlibModule } from './nodeplotlib.module';
 import { PlotsService } from './plots/plots.service';
-let app: INestApplication|null = null;
+let app: INestApplication | null = null;
 let plotsService: PlotsService;
-
 
 /**
  * Plots the registered plots to a browser.
@@ -21,10 +20,9 @@ export async function plot(data?: Plot[] | null, layout?: Layout) {
     plotsService.addPlot({ data, layout });
   }
 
-  const address = app.getHttpServer().address();
-  openWindow(`http://localhost:${address.port}`);
+  // const address = app.getHttpServer().address();
+  // openWindow(`http://localhost:${address.port}`);
 }
-
 
 /**
  * Stacks plot data to a stack. When executing `plot`
@@ -38,7 +36,6 @@ export async function stack(data: Plot[], layout?: Layout) {
   plotsService.addPlot({ data, layout });
 }
 
-
 /**
  * Clears all stacked plots and shuts down the server if it
  * exists.
@@ -49,15 +46,18 @@ export async function clear() {
   }
 }
 
-async function bootstrap() {
+export async function bootstrap(port = 0, production = true) {
   if (app) {
+    console.log('App is already up and running');
     return;
   }
-  app = await NestFactory.create(NodeplotlibModule);
+  app = await NestFactory.create(NodeplotlibModule, {
+    cors: production ? false : true,
+  });
   plotsService = app.get(PlotsService);
-  await app.listen(0);
+  await app.listen(port);
+  console.log('Server runnng at', app.getHttpServer().address().port);
 }
-
 
 function openWindow(location: string) {
   switch (type()) {

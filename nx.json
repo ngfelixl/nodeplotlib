@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "dev-server": {
+      "tags": ["type:app"]
+    },
     "interfaces": {
       "tags": ["type:util", "scope:shared"]
     },

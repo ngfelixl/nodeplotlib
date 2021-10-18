@@ -10,7 +10,7 @@ export class PlotsController {
   getPlots(): DataTransferObject {
     const dto: DataTransferObject = {
       stacks: this.plotsService.stacks$.getValue(),
-      plots: this.plotsService.plots$.getValue()
+      plots: this.plotsService.plots$.getValue(),
     };
 
     return dto;
