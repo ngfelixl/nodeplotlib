@@ -13,6 +13,7 @@ import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { PlotsService } from './services/plots.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { PlotComponent } from './components/plot/plot.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
     StacksComponent,
     StackComponent,
     OverviewComponent,
+    PlotComponent,
   ],
   imports: [
     AppRoutingModule,
