@@ -107,4 +107,5 @@ import { PlotType } from 'plotly.js';
   } as Layout;
 
   plot(data, layout);
+  plot(data, layout);
 })();

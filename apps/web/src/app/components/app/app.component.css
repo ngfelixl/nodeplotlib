@@ -26,3 +26,8 @@ mat-toolbar {
   flex: 0 0 auto;
   justify-content: space-between;
 }
+
+.info-icons {
+  display: flex;
+  gap: 8px;
+}

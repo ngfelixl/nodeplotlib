@@ -11,3 +11,9 @@ mat-drawer-container {
 mat-drawer {
   min-width: 140px;
 }
+
+mat-drawer-content {
+  padding: 24px;
+  background-color: rgb(241, 241, 241);
+  box-sizing: border-box;
+}
