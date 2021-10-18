@@ -2,10 +2,11 @@ import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { exec } from 'child_process';
 import { type } from 'os';
-import { addPlot$ } from './+state/actions';
-import { Layout, Plot } from './models';
+import { Layout, Plot } from '@npl/interfaces';
 import { NodeplotlibModule } from './nodeplotlib.module';
+import { PlotsService } from './plots/plots.service';
 let app: INestApplication|null = null;
+let plotsService: PlotsService;
 
 
 /**
@@ -15,9 +16,11 @@ let app: INestApplication|null = null;
  * @param cb
  */
 export async function plot(data?: Plot[] | null, layout?: Layout) {
-  addPlot$.next({ data, layout });
-
   await bootstrap();
+  if (data) {
+    plotsService.addPlot({ data, layout });
+  }
+
   const address = app.getHttpServer().address();
   openWindow(`http://localhost:${address.port}`);
 }
@@ -29,8 +32,10 @@ export async function plot(data?: Plot[] | null, layout?: Layout) {
  * @param data
  * @param layout
  */
-export function stack(data: Plot[], layout?: Layout) {
-  addPlot$.next({ data, layout });
+export async function stack(data: Plot[], layout?: Layout) {
+  await bootstrap();
+
+  plotsService.addPlot({ data, layout });
 }
 
 
@@ -44,10 +49,12 @@ export async function clear() {
   }
 }
 
-
 async function bootstrap() {
-  await clear();
+  if (app) {
+    return;
+  }
   app = await NestFactory.create(NodeplotlibModule);
+  plotsService = app.get(PlotsService);
   await app.listen(0);
 }
 

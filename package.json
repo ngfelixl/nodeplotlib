@@ -9,7 +9,8 @@
     "format:write": "nx format:write",
     "lint": "nx affected:lint",
     "build": "nx build web && nx build nodeplotlib && zx ./tools/copy-files.mjs",
-    "test": "nx test"
+    "test": "nx test",
+    "demo": "node ./tools/demo/candlestick.js"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +30,9 @@
     "@nestjs/platform-socket.io": "^8.0.10",
     "@nestjs/serve-static": "^2.2.2",
     "@nestjs/websockets": "^8.0.10",
+    "@ngrx/effects": "^12.4.0",
+    "@ngrx/entity": "^12.4.0",
+    "@ngrx/store": "^12.4.0",
     "@nrwl/angular": "12.9.0",
     "@nrwl/nest": "^12.9.0",
     "@types/plotly.js": "^1.54.16",
@@ -74,6 +78,7 @@
     "request": "^2.88.2",
     "ts-jest": "27.0.3",
     "typescript": "~4.3.5",
-    "zx": "^4.2.0"
+    "zx": "^4.2.0",
+    "eslint-plugin-ngrx": "^1.0.0"
   }
 }

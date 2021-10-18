@@ -4,10 +4,7 @@ export type Plot = Partial<PlotlyPlotData>;
 export type Layout = Partial<FullLayout>;
 
 export interface PlotData {
+  id: number;
   data: Plot[];
   layout?: Layout;
-}
-
-export interface PlotEntities {
-  [id: number]: PlotData;
 }

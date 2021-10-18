@@ -1,6 +1,39 @@
 {
   "version": 1,
   "projects": {
+    "interfaces": {
+      "root": "libs/interfaces",
+      "sourceRoot": "libs/interfaces/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/interfaces",
+            "tsConfig": "libs/interfaces/tsconfig.lib.json",
+            "packageJson": "libs/interfaces/package.json",
+            "main": "libs/interfaces/src/index.ts",
+            "assets": ["libs/interfaces/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/interfaces/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/interfaces"],
+          "options": {
+            "jestConfig": "libs/interfaces/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "nodeplotlib": {
       "root": "libs/nodeplotlib",
       "sourceRoot": "libs/nodeplotlib/src",
