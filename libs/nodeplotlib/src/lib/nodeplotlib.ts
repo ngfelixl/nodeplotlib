@@ -3,8 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { exec } from 'child_process';
 import { type } from 'os';
 import { Layout, Plot } from '@npl/interfaces';
-import { NodeplotlibModule } from './nodeplotlib.module';
-import { PlotsService } from './plots/plots.service';
+import { ServerModule, PlotsService } from '@npl/server';
 let app: INestApplication | null = null;
 let plotsService: PlotsService;
 
@@ -20,8 +19,8 @@ export async function plot(data?: Plot[] | null, layout?: Layout) {
     plotsService.addPlot({ data, layout });
   }
 
-  // const address = app.getHttpServer().address();
-  // openWindow(`http://localhost:${address.port}`);
+  const address = app.getHttpServer().address();
+  openWindow(`http://localhost:${address.port}`);
 }
 
 /**
@@ -46,14 +45,12 @@ export async function clear() {
   }
 }
 
-export async function bootstrap(port = 0, production = true) {
+export async function bootstrap(port = 0) {
   if (app) {
     console.log('App is already up and running');
     return;
   }
-  app = await NestFactory.create(NodeplotlibModule, {
-    cors: production ? false : true,
-  });
+  app = await NestFactory.create(ServerModule);
   plotsService = app.get(PlotsService);
   await app.listen(port);
   console.log('Server runnng at', app.getHttpServer().address().port);
