@@ -1,19 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { OverviewComponent } from './components/overview/overview.component';
-import { StackComponent } from './components/stack/stack.component';
-import { StacksComponent } from './components/stacks/stacks.component';
+import { PlotsComponent } from './components/plots/plots.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 const routes: Route[] = [
-  {
-    path: 'plots',
-    component: StacksComponent,
-    children: [
-      { path: '', component: OverviewComponent },
-      { path: ':id', component: StackComponent },
-    ],
-  },
+  { path: 'plots', component: PlotsComponent },
   { path: 'tutorial', component: TutorialComponent },
   { path: '**', redirectTo: 'plots' },
 ];

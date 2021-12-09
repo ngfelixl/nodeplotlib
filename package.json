@@ -8,7 +8,7 @@
     "start": "nx serve",
     "format:write": "nx format:write",
     "lint": "nx affected:lint",
-    "build": "nx build web && nx build nodeplotlib && zx ./tools/copy-files.mjs",
+    "build": "nx build",
     "test": "nx test",
     "demo": "node ./tools/demo/candlestick.js"
   },
@@ -38,6 +38,7 @@
     "@nrwl/nest": "^12.9.0",
     "@types/plotly.js": "^1.54.16",
     "express": "^4.17.1",
+    "ngx-socket-io": "^4.1.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

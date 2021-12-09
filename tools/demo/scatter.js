@@ -1,3 +1,2 @@
-const npl = require('../../dist/libs/nodeplotlib');
-npl.stack([{ x: [0], y: [1], type: 'scatter' }]);
-npl.plot();
+const npl = require('../../dist/apps/nodeplotlib/main');
+npl.plot([{ x: [0], y: [1], type: 'scatter' }]);
