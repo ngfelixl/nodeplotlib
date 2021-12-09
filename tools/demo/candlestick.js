@@ -1,4 +1,4 @@
-const npl = require('../../dist/libs/nodeplotlib');
+const npl = require('../../dist/apps/nodeplotlib');
 
 const trace1 = {
   x: [

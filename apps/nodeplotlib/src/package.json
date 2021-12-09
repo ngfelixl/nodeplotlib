@@ -1,0 +1,6 @@
+{
+  "name": "npl",
+  "version": "0.8.0-rc0",
+  "license": "MIT",
+  "main": "main.js"
+}

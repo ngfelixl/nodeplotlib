@@ -1,6 +1,39 @@
 {
   "version": 1,
   "projects": {
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/core",
+            "tsConfig": "libs/core/tsconfig.lib.json",
+            "packageJson": "libs/core/package.json",
+            "main": "libs/core/src/index.ts",
+            "assets": ["libs/core/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core"],
+          "options": {
+            "jestConfig": "libs/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "dev-server": {
       "root": "apps/dev-server",
       "sourceRoot": "apps/dev-server/src",
@@ -13,7 +46,14 @@
             "outputPath": "dist/apps/dev-server",
             "main": "apps/dev-server/src/main.ts",
             "tsConfig": "apps/dev-server/tsconfig.app.json",
-            "assets": ["apps/dev-server/src/assets"]
+            "assets": [
+              "apps/dev-server/src/assets",
+              {
+                "glob": "**/*",
+                "input": "dist/apps/web",
+                "output": "web"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -86,66 +126,54 @@
       }
     },
     "nodeplotlib": {
-      "root": "libs/nodeplotlib",
-      "sourceRoot": "libs/nodeplotlib/src",
-      "projectType": "library",
+      "root": "apps/nodeplotlib",
+      "sourceRoot": "apps/nodeplotlib/src",
+      "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/libs/nodeplotlib",
-            "tsConfig": "libs/nodeplotlib/tsconfig.lib.json",
-            "packageJson": "libs/nodeplotlib/package.json",
-            "main": "libs/nodeplotlib/src/index.ts",
-            "assets": ["libs/nodeplotlib/*.md"]
+            "outputPath": "dist/apps/nodeplotlib",
+            "main": "apps/nodeplotlib/src/main.ts",
+            "tsConfig": "apps/nodeplotlib/tsconfig.app.json",
+            "assets": [
+              "apps/nodeplotlib/src/assets",
+              "apps/nodeplotlib/src/package.json"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nodeplotlib/src/environments/environment.ts",
+                  "with": "apps/nodeplotlib/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "nodeplotlib:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/nodeplotlib/**/*.ts"]
+            "lintFilePatterns": ["apps/nodeplotlib/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/nodeplotlib"],
+          "outputs": ["coverage/apps/nodeplotlib"],
           "options": {
-            "jestConfig": "libs/nodeplotlib/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "server": {
-      "root": "libs/server",
-      "sourceRoot": "libs/server/src",
-      "projectType": "library",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:package",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/libs/server",
-            "tsConfig": "libs/server/tsconfig.lib.json",
-            "packageJson": "libs/server/package.json",
-            "main": "libs/server/src/index.ts",
-            "assets": ["libs/server/*.md"]
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/server/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/server"],
-          "options": {
-            "jestConfig": "libs/server/jest.config.js",
+            "jestConfig": "apps/nodeplotlib/jest.config.js",
             "passWithNoTests": true
           }
         }
