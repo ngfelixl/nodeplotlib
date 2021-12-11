@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-
-// const url = environment.production
-//   ? '/api/plots'
-//   : 'http://localhost:3333/api/plots';
+import { PlotData } from '@npl/interfaces';
+import { BehaviorSubject } from 'rxjs';
+import { SocketService } from './socket.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class PlotsService {
-  // data$ = this.http.get<DataTransferObject>(url).pipe(shareReplay(1));
-  // constructor(private http: HttpClient) {}
+  private plotDataMap$ = new BehaviorSubject<Map<number, PlotData>>(new Map());
+  plots$ = this.plotDataMap$.pipe(
+    map((plotDataMap) => Array.from(plotDataMap.values()))
+  );
+
+  constructor(private socketService: SocketService) {
+    this.socketService.listen<PlotData>('plotdata', (data) => {
+      const plots = this.plotDataMap$.value;
+      plots.set(data.id, data);
+      this.plotDataMap$.next(plots);
+    });
+    this.socketService.emit('readplots');
+  }
 }

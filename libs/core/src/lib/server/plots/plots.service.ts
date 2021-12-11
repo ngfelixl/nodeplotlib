@@ -1,19 +1,43 @@
 import { Injectable } from '@nestjs/common';
-import { PlotData } from '@npl/interfaces';
-import { Observable, of } from 'rxjs';
+import { PlotDataStream } from '@npl/interfaces';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class PlotsService {
-  plots = new Map<number, Observable<PlotData>>();
+  plotEntities = new Map<number, PlotDataStream>();
+  plotIds$ = new BehaviorSubject<Set<number>>(new Set());
   private currentPlotId = 0;
+  private bufferSubscription: Subscription;
 
-  addPlot(plotData: Omit<PlotData, 'id'>) {
-    const plot: PlotData = {
+  setBuffer(buffer$: Observable<Omit<PlotDataStream, 'id'>[]>) {
+    this.bufferSubscription?.unsubscribe();
+    this.bufferSubscription = buffer$
+      .pipe(filter((buffer) => buffer.length > 0))
+      .subscribe((buffer) => this.readBuffer(buffer));
+  }
+
+  addPlot(plotData: Omit<PlotDataStream, 'id'>) {
+    const plot: PlotDataStream = {
       id: this.currentPlotId++,
       data: plotData.data,
       layout: plotData.layout,
     };
 
-    this.plots.set(plot.id, of(plot));
+    this.plotEntities.set(plot.id, plot);
+    const plotIds = this.plotIds$.value;
+    plotIds.add(plot.id);
+    this.plotIds$.next(plotIds);
+  }
+
+  /**
+   * Function gets executed on the main process and makes the service read
+   * the buffered plot data.
+   * @param buffer
+   */
+  readBuffer(buffer: Omit<PlotDataStream, 'id'>[]) {
+    for (const plot of buffer) {
+      this.addPlot(plot);
+    }
   }
 }

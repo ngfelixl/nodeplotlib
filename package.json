@@ -36,7 +36,7 @@
     "@ngrx/store": "^12.4.0",
     "@nrwl/angular": "12.9.0",
     "@nrwl/nest": "^12.9.0",
-    "@types/plotly.js": "^1.54.16",
+    "@types/plotly.js": "^1.54.17",
     "express": "^4.17.1",
     "ngx-socket-io": "^4.1.0",
     "reflect-metadata": "^0.1.13",

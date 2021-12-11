@@ -15,6 +15,8 @@ import { PlotComponent } from './components/plot/plot.component';
 import { PlotsComponent } from './components/plots/plots.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketService } from './services/socket.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card';
 
 const config: SocketIoConfig = {
   url: '',
@@ -39,6 +41,8 @@ const config: SocketIoConfig = {
     MatSidenavModule,
     MatListModule,
     SocketIoModule.forRoot(config),
+    DragDropModule,
+    MatCardModule,
   ],
   providers: [PlotsService, SocketService],
   bootstrap: [AppComponent],

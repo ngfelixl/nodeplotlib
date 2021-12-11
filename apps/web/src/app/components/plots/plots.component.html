@@ -1,1 +1,3 @@
-<p>plots works!</p>
+<mat-card *ngFor="let plot of plots$ | async; trackBy: trackById">
+  <npl-plot [plotData]="plot"></npl-plot>
+</mat-card>

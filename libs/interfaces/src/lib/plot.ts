@@ -1,7 +1,14 @@
-import { Layout as FullLayout, PlotData as PlotlyPlotData } from 'plotly.js';
+import { Layout as PlotlyLayout, PlotData as PlotlyPlotData } from 'plotly.js';
+import { Observable } from 'rxjs';
 
 export type Plot = Partial<PlotlyPlotData>;
-export type Layout = Partial<FullLayout>;
+export type Layout = Partial<PlotlyLayout>;
+
+export interface PlotDataStream {
+  id: number;
+  data: Observable<Plot[]>;
+  layout: Observable<Layout>;
+}
 
 export interface PlotData {
   id: number;

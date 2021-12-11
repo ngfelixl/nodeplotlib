@@ -1,1 +1,1 @@
-export { Layout, Plot, PlotData } from './plot';
+export { Layout, Plot, PlotData, PlotDataStream } from './plot';
