@@ -3,7 +3,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { PlotsGateway } from './plots/plots.gateway';
 import { PlotsService } from './plots/plots.service';
-import { ShutdownService } from './services/shutdown.service';
+import { BridgeService } from './services/bridge.service';
 
 @Module({
   imports: [
@@ -11,6 +11,6 @@ import { ShutdownService } from './services/shutdown.service';
       rootPath: join(__dirname, 'web'),
     }),
   ],
-  providers: [PlotsGateway, PlotsService, ShutdownService],
+  providers: [PlotsGateway, PlotsService, BridgeService],
 })
 export class ServerModule {}

@@ -4,6 +4,8 @@ import {
   Component,
   ElementRef,
   Input,
+  OnChanges,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { PlotData } from '@npl/interfaces';
@@ -17,7 +19,7 @@ declare const Plotly: any;
   styleUrls: ['./plot.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlotComponent implements AfterViewInit {
+export class PlotComponent implements AfterViewInit, OnChanges {
   @Input() plotData!: PlotData;
   @ViewChild('plotContainer', { static: false }) plotContainer!: ElementRef;
 
@@ -28,5 +30,16 @@ export class PlotComponent implements AfterViewInit {
       { ...(this.plotData.layout ?? {}), autosize: true },
       { responsive: true }
     );
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges.plotData) {
+      Plotly.react(
+        this.plotContainer.nativeElement,
+        this.plotData.data,
+        { ...(this.plotData.layout ?? {}), autosize: true },
+        { responsive: true }
+      );
+    }
   }
 }

@@ -1,21 +1,48 @@
 import {
-  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets';
-import { ShutdownService } from '../services/shutdown.service';
+import { PlotData } from '@npl/interfaces';
+import { combineLatest, merge, Observable } from 'rxjs';
+import { map, share, switchMap } from 'rxjs/operators';
+import { BridgeService } from '../services/bridge.service';
+import { PlotsService } from './plots.service';
 
 @WebSocketGateway({ transports: ['polling'] })
 export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private clientMap = new Map<WebSocket, number>();
+  private plotDataStream$: Observable<PlotData>;
 
-  constructor(private shutdownService: ShutdownService) {}
+  constructor(
+    private bridgeService: BridgeService,
+    private plotsService: PlotsService
+  ) {
+    this.plotDataStream$ = this.plotsService.plotIds$.pipe(
+      switchMap((plotIds) =>
+        merge(
+          ...Array.from(plotIds).map((id) => {
+            const plotDataStream = this.plotsService.plotEntities.get(id);
+            return combineLatest([
+              plotDataStream.data,
+              plotDataStream.layout,
+            ]).pipe(map(([data, layout]) => ({ id, data, layout })));
+          })
+        )
+      ),
+      share()
+    );
+  }
 
-  @SubscribeMessage('close')
-  handleEvent(@MessageBody('id') id: number) {
-    console.log(id);
+  @SubscribeMessage('readplots')
+  handleEvent() {
+    return this.plotDataStream$.pipe(
+      map((plotData) => ({
+        event: 'plotdata',
+        data: plotData,
+      }))
+    );
   }
 
   handleConnection(client: WebSocket) {
@@ -28,7 +55,7 @@ export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.clientMap.delete(client);
 
     if (this.clientMap.size === 0) {
-      this.shutdownService.shutdown$.next();
+      this.bridgeService.shutdown$.next();
     }
   }
 }
