@@ -138,9 +138,10 @@
             "main": "apps/nodeplotlib/src/main.ts",
             "tsConfig": "apps/nodeplotlib/tsconfig.app.json",
             "assets": [
-              "apps/nodeplotlib/src/assets",
               "apps/nodeplotlib/src/package.json"
-            ]
+            ],
+            "externalDendencies": "none",
+            "webpackConfig": "apps/nodeplotlib/webpack.config.js"
           },
           "configurations": {
             "production": {
