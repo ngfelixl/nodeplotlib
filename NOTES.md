@@ -28,6 +28,11 @@ These are notes for the stream implementation of Nodeplotlib.
 - Is the `stack` function really needed? Stack served the purpose that only one window opens which
   could display several plots.
 
+## The clear function
+
+- The `clear` function is also probably not needed. Just close all windows and it should close the
+  subscriptions to the plots and streams.
+
 ## Backlog
 
 - The user can remove plots from the frontend. If that happened it submits a message to the

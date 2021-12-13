@@ -37,7 +37,8 @@
       "tags": ["type:util", "scope:shared"]
     },
     "nodeplotlib": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["web"]
     },
     "web": {
       "tags": []
