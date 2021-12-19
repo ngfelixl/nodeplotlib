@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { Layout, Plot, PlotDataStream } from '@npl/interfaces';
+import { Layout, Plot, PlotDataStream } from './interfaces';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { PlotsService } from './server/plots/plots.service';
 import { ServerModule } from './server/server.module';

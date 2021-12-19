@@ -4,7 +4,7 @@ import {
   SubscribeMessage,
   WebSocketGateway,
 } from '@nestjs/websockets';
-import { PlotData } from '@npl/interfaces';
+import { PlotData } from '../../interfaces';
 import { combineLatest, merge, Observable } from 'rxjs';
 import { map, share, switchMap } from 'rxjs/operators';
 import { BridgeService } from '../services/bridge.service';
@@ -24,6 +24,9 @@ export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         merge(
           ...Array.from(plotIds).map((id) => {
             const plotDataStream = this.plotsService.plotEntities.get(id);
+            if (!plotDataStream) {
+              return new Observable<PlotData>();
+            }
             return combineLatest([
               plotDataStream.data,
               plotDataStream.layout,

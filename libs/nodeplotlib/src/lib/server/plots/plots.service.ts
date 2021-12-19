@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PlotDataStream } from '@npl/interfaces';
+import { PlotDataStream } from '../../interfaces';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ export class PlotsService {
   plotEntities = new Map<number, PlotDataStream>();
   plotIds$ = new BehaviorSubject<Set<number>>(new Set());
   private currentPlotId = 0;
-  private bufferSubscription: Subscription;
+  private bufferSubscription?: Subscription;
 
   setBuffer(buffer$: Observable<Omit<PlotDataStream, 'id'>[]>) {
     this.bufferSubscription?.unsubscribe();

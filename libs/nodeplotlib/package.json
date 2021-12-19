@@ -1,0 +1,11 @@
+{
+  "name": "nodeplotlib",
+  "version": "1.0.0-rc0",
+  "license": "MIT",
+  "dependencies": {
+    "@types/plotly.js": "^1.54.17"
+  },
+  "peerDependencies": {
+    "rxjs": "^7.0.0"
+  }
+}

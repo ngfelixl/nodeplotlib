@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PlotData } from '@npl/interfaces';
+import { PlotData } from '@npl/nodeplotlib';
 import { PlotsService } from '../../services/plots.service';
 
 @Component({

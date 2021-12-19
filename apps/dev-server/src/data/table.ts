@@ -1,4 +1,4 @@
-import { Plot } from '@npl/interfaces';
+import { Plot } from '@npl/nodeplotlib';
 
 const values = [
   ['Salaries', 'Office', 'Merchandise', 'Legal', '<b>TOTAL</b>'],

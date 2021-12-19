@@ -1,4 +1,4 @@
-import { Layout, Plot } from '@npl/interfaces';
+import { Layout, Plot } from '@npl/nodeplotlib';
 
 function normal() {
   let x = 0,

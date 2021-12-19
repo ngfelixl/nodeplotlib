@@ -1,4 +1,4 @@
-import { Plot } from '@npl/interfaces';
+import { Plot } from '@npl/nodeplotlib';
 
 export const data: Plot[] = [
   {

@@ -15,8 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@npl/core": ["libs/core/src/index.ts"],
-      "@npl/interfaces": ["libs/interfaces/src/index.ts"]
+      "@npl/nodeplotlib": ["libs/nodeplotlib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

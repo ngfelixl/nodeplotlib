@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PlotData } from '@npl/interfaces';
+import { PlotData } from '@npl/nodeplotlib';
 import { Subject } from 'rxjs';
 import { PlotsService } from '../../services/plots.service';
 import { PlotsComponent } from './plots.component';

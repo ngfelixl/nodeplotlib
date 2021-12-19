@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { plot } from '@npl/core';
+import { plot } from '@npl/nodeplotlib';
 import {
   data as histogram,
   layout as histogramLayout,

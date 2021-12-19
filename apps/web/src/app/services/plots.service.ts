@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlotData } from '@npl/interfaces';
+import { PlotData } from '@npl/nodeplotlib';
 import { BehaviorSubject } from 'rxjs';
 import { SocketService } from './socket.service';
 import { map } from 'rxjs/operators';
