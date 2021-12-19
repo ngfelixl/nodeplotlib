@@ -1,18 +1,21 @@
 <mat-toolbar color="primary">
-  <span class="brand">
+  <span class="brand" routerLink="/">
     <button mat-flat-button color="primary">NodePlotLib</button>
   </span>
   <span class="info-icons">
-    <a href="https://github.com/ngfelixl/nodeplotlib" target="_blank"
-      ><button mat-icon-button>
-        <img src="/assets/github-light-32px.png" /></button
-    ></a>
+    <button mat-icon-button routerLink="tutorial">
+      <mat-icon>tips_and_updates</mat-icon>
+    </button>
     <a href="https://plotly.com/javascript/" target="_blank"
       ><button mat-icon-button>
         <img src="/assets/plotly.svg" /></button
     ></a>
+    <a href="https://github.com/ngfelixl/nodeplotlib" target="_blank"
+      ><button mat-icon-button>
+        <img src="/assets/github-light-32px.png" /></button
+    ></a>
   </span>
 </mat-toolbar>
 <main>
-  <router-outlet class="main-router-outlet"></router-outlet>
+  <router-outlet></router-outlet>
 </main>
