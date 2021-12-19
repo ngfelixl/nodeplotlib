@@ -4,4 +4,4 @@ import { Observable } from 'rxjs';
 
 export type Plot = Partial<PlotData>;
 export type Layout = Partial<PlotlyLayout>;
-export function plot(plot: Plot[] | Observable<Plot[]>, layout?: Layout): void
+export function plot(plot: Plot[] | Observable<Plot[]>, layout?: Layout): void;

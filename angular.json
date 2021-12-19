@@ -137,9 +137,7 @@
             "outputPath": "dist/apps/nodeplotlib",
             "main": "apps/nodeplotlib/src/main.ts",
             "tsConfig": "apps/nodeplotlib/tsconfig.app.json",
-            "assets": [
-              "apps/nodeplotlib/src/package.json"
-            ],
+            "assets": ["apps/nodeplotlib/src/package.json"],
             "externalDendencies": "none",
             "webpackConfig": "apps/nodeplotlib/webpack.config.js"
           },
@@ -299,37 +297,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "css",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "css"
-    }
-  },
-  "defaultProject": "web"
+  }
 }

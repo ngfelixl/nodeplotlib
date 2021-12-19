@@ -14,7 +14,8 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "parallel": 1
       }
     }
   },
@@ -25,27 +26,5 @@
         "projects": "dependencies"
       }
     ]
-  },
-  "projects": {
-    "core": {
-      "tags": []
-    },
-    "dev-server": {
-      "tags": ["type:app"]
-    },
-    "interfaces": {
-      "tags": ["type:util", "scope:shared"]
-    },
-    "nodeplotlib": {
-      "tags": [],
-      "implicitDependencies": ["web"]
-    },
-    "web": {
-      "tags": []
-    },
-    "web-e2e": {
-      "tags": [],
-      "implicitDependencies": ["web"]
-    }
   }
 }
