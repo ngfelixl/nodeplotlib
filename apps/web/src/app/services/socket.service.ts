@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { io } from 'socket.io-client';
+import { Injectable, OnDestroy } from '@angular/core';
+import { io, Socket } from 'socket.io-client';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class SocketService {
-  socket;
+export class SocketService implements OnDestroy {
+  private socket: Socket;
 
   constructor() {
     this.socket = io(environment.socketIoEndpoint, { transports: ['polling'] });
@@ -24,5 +24,9 @@ export class SocketService {
 
   emit<T>(eventName: string, data?: T) {
     this.socket.emit(eventName, data);
+  }
+
+  ngOnDestroy() {
+    this.socket?.disconnect();
   }
 }
