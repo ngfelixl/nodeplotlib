@@ -1,4 +1,4 @@
-import { Plot } from '@npl/interfaces';
+import { Plot } from '@npl/nodeplotlib';
 import { interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { PlotData } from '@npl/interfaces';
+import { PlotData } from '@npl/nodeplotlib';
 
 // eslint-disable-next-line
 declare const Plotly: any;

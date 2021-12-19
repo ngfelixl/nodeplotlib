@@ -7,7 +7,7 @@ export type Layout = Partial<PlotlyLayout>;
 export interface PlotDataStream {
   id: number;
   data: Observable<Plot[]>;
-  layout: Observable<Layout>;
+  layout: Observable<Layout | undefined>;
 }
 
 export interface PlotData {
