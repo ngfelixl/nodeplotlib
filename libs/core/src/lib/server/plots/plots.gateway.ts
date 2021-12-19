@@ -55,7 +55,7 @@ export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.clientMap.delete(client);
 
     if (this.clientMap.size === 0) {
-      this.bridgeService.shutdown$.next();
+      this.bridgeService.shutdown$.next(null);
     }
   }
 }

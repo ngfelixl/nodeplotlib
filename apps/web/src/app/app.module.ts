@@ -13,15 +13,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PlotComponent } from './components/plot/plot.component';
 import { PlotsComponent } from './components/plots/plots.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketService } from './services/socket.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
-
-const config: SocketIoConfig = {
-  url: '',
-  options: { transports: ['polling'] },
-};
 
 @NgModule({
   declarations: [
@@ -40,7 +34,6 @@ const config: SocketIoConfig = {
     HttpClientModule,
     MatSidenavModule,
     MatListModule,
-    SocketIoModule.forRoot(config),
     DragDropModule,
     MatCardModule,
   ],

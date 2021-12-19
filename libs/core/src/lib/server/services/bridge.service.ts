@@ -18,6 +18,6 @@ export class BridgeService {
   }
 
   shutdown() {
-    this.shutdown$.next();
+    this.shutdown$.next(null);
   }
 }

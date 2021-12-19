@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import { io } from 'socket.io-client';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SocketService {
-  constructor(private socket: Socket) {
+  socket;
+
+  constructor() {
+    this.socket = io(environment.socketIoEndpoint, { transports: ['polling'] });
+
     this.socket.on('connect', () => {
       console.log('connected');
     });
