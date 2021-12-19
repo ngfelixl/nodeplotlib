@@ -18,10 +18,6 @@ main {
   justify-content: stretch;
 }
 
-:host ::ng-deep .main-router-outlet + * {
-  flex: 1 1 0;
-}
-
 mat-toolbar {
   flex: 0 0 auto;
   justify-content: space-between;
