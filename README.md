@@ -28,7 +28,7 @@ Use with TypeScript/JavaScript:
 
 ```typescript
 import { plot, Plot } from 'nodeplotlib';
-const data: Plot[] = [{x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'scatter'}];
+const data: Plot[] = [{ x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'scatter' }];
 plot(data);
 ```
 
@@ -50,11 +50,13 @@ With the stack function the user is able to print multiple charts on one page.
 ```typescript
 import { plot, stack, clear, Plot } from 'nodeplotlib';
 
-const data: Plot[] = [{
-  x: [ 1, 3, 4, 6, 7],
-  y: [ 2, 4, 6, 8, 9],
-  type: 'scatter'
-}];
+const data: Plot[] = [
+  {
+    x: [1, 3, 4, 6, 7],
+    y: [2, 4, 6, 8, 9],
+    type: 'scatter',
+  },
+];
 
 stack(data);
 stack(data);
@@ -84,29 +86,40 @@ In this section there are some examples to getting started. See the full plotly
 #### Line Plots
 
 ```typescript
-const trace1: Plot = {x: [1, 2], y: [1, 2], type: 'scatter'};
-const trace2: Plot = {x: [3, 4], y: [9, 16], type: 'scatter'};
+const trace1: Plot = { x: [1, 2], y: [1, 2], type: 'scatter' };
+const trace2: Plot = { x: [3, 4], y: [9, 16], type: 'scatter' };
 plot([trace1, trace2]);
 ```
 
 #### Bar Charts
 
 ```typescript
-const trace: Plot = {x: [1, 2], y: [1, 2], type: 'bar'};
+const trace: Plot = { x: [1, 2], y: [1, 2], type: 'bar' };
 plot([trace]);
 ```
 
 #### 3D Line Plots
 
 ```typescript
-const trace: Plot = {x: [9, 8, 5, 1], y: [1, 2, 4, 8], z: [11, 8, 15, 3], type: 'scatter3d'};
+const trace: Plot = {
+  x: [9, 8, 5, 1],
+  y: [1, 2, 4, 8],
+  z: [11, 8, 15, 3],
+  type: 'scatter3d',
+};
 plot([trace]);
 ```
 
 #### 3D Surface Plots
 
 ```typescript
-const trace: Plot = {colorscale: 'Viridis', z: [[3, 5, 7, 9], [21, 13, 8, 5]]};
+const trace: Plot = {
+  colorscale: 'Viridis',
+  z: [
+    [3, 5, 7, 9],
+    [21, 13, 8, 5],
+  ],
+};
 plot([trace]);
 ```
 
@@ -116,25 +129,27 @@ In order to style the plot, one is able to pass in the `layout` parameter, which
 is typeof `Partial<Layout>` from plotly's `Layout`. See the full layout documentation
 [here](https://plot.ly/javascript/#layout-options).
 
-With this parameter one is able to define styles like *title*, *axis labels*,
-*subplots* and many more.
+With this parameter one is able to define styles like _title_, _axis labels_,
+_subplots_ and many more.
 
 ```typescript
-const data: Plot[] = [{
-  type: 'scatterpolar',
-  r: [1.5, 10, 39, 31, 15, 1.5],
-  theta: ['A','B','C', 'D', 'E', 'A'],
-  fill: 'toself',
-  name: 'Group B'
-}];
+const data: Plot[] = [
+  {
+    type: 'scatterpolar',
+    r: [1.5, 10, 39, 31, 15, 1.5],
+    theta: ['A', 'B', 'C', 'D', 'E', 'A'],
+    fill: 'toself',
+    name: 'Group B',
+  },
+];
 
 const layout: Layout = {
   polar: {
     radialaxis: {
       visible: true,
-      range: [0, 50]
-    }
-  }
+      range: [0, 50],
+    },
+  },
 };
 
 plot(data, layout);
@@ -142,14 +157,14 @@ plot(data, layout);
 
 ## Plot types
 
-| Simple charts              | Advanced charts             | 3D Plots           |
-| -------------------------- | --------------------------- | ------------------ |
-| Scatter                    | 2d density plots            | Scatter            |
-| Line                       | Histograms                  | Surface            |
-| Bar                        | Box-plots                   | Lines              |
-| Pie charts                 | Contour plots               |                    |
-| Sankey diagrams            | Heatmaps                    |                    |
-| Tables                     | Radar charts                |                    |
+| Simple charts   | Advanced charts  | 3D Plots |
+| --------------- | ---------------- | -------- |
+| Scatter         | 2d density plots | Scatter  |
+| Line            | Histograms       | Surface  |
+| Bar             | Box-plots        | Lines    |
+| Pie charts      | Contour plots    |          |
+| Sankey diagrams | Heatmaps         |          |
+| Tables          | Radar charts     |          |
 
 ## Behind the scenes
 
