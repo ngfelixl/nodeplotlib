@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "1.0.0-rc0",
+  "version": "1.0.0-rc1",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
