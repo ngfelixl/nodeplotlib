@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Subject } from 'rxjs';
-import { openWindow } from '../../open-window';
+import { openWindow } from '../../utils/open-window';
 
 @Injectable()
 export class BridgeService {

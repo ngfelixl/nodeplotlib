@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { PlotsService } from './server/plots/plots.service';
 import { ServerModule } from './server/server.module';
 import { BridgeService } from './server/services/bridge.service';
+import { getPort } from './utils/get-port';
 let app: INestApplication | null = null;
 let plotsService: PlotsService;
 let bridgeService: BridgeService;
@@ -16,6 +17,7 @@ let bridgeService: BridgeService;
 let appRuns = false;
 let shutdownSubscription: Subscription;
 const plotsBuffer$ = new BehaviorSubject<Omit<PlotDataStream, 'id'>[]>([]);
+const port = getPort();
 
 /**
  * Plots the given data with the given layout. This function
@@ -25,7 +27,7 @@ const plotsBuffer$ = new BehaviorSubject<Omit<PlotDataStream, 'id'>[]>([]);
  * @param cb
  */
 export function plot(data: Plot[] | Observable<Plot[]>, layout?: Layout) {
-  bootstrap();
+  bootstrap(port);
   const bufferedPlots = plotsBuffer$.value;
 
   const streamData$: Observable<Plot[]> =
@@ -46,7 +48,7 @@ export async function clear() {
   }
 }
 
-export async function bootstrap(port = 0) {
+export async function bootstrap(port: number) {
   if (appRuns) {
     console.log('App is already up and running');
     return;
