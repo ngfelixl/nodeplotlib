@@ -5,7 +5,5 @@
   "dependencies": {
     "@types/plotly.js": "^1.54.17"
   },
-  "peerDependencies": {
-    "rxjs": "^7.0.0"
-  }
+  "peerDependencies": {}
 }
