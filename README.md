@@ -7,9 +7,13 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
-This readme contains all the necessary information for the development. [Here](./libs/nodeplotlib/README.md) you can find the users instructions that you also find in the npm description.
+This readme contains all the necessary information for the development.
+
+## [Go to the user docs](./libs/nodeplotlib/README.md)
 
 ## Installation
+
+### Npmjs
 
 ```sh
 npm install nodeplotlib
@@ -17,18 +21,30 @@ npm install nodeplotlib
 yarn add nodeplotlib
 ```
 
+### Repository
+
+Create a fork of this repository. Then clone it
+
+```
+git clone https://github.com/{{USERNAME}}/nodeplotlib
+cd nodeplotlib
+npm i
+```
+
 ## Serving the app for development
+
+Serving in development mode prevents the app to open a new browser window on changes.
+You can open the app at the specified port, e.g. `http://localhost:4201`.
 
 ```
 npx nx run web:build -- --watch
-NODE_ENV=development npx nx run dev-server:serve
-// or on Windows cmd
-set "NODE_ENV=development" && npx nx run dev-server:serve
-// or on Windows Powershell
-($env:NODE_ENV = "development") -and (npx nx run dev-server:serve)
-```
 
-Unfortunately, it
+NODEPLOTLIB_PORT=4201 npx nx run dev-server:serve
+// or on Windows cmd
+set "NODEPLOTLIB_PORT=4201" && npx nx run dev-server:serve
+// or on Windows Powershell
+$env:NODEPLOTLIB_PORT = "4201" ; npx nx run dev-server:serve
+```
 
 ## Behind the scenes
 
@@ -38,28 +54,9 @@ server itself. At this address the Angular application will be served temporaril
 The server and the app set up a connection via socket.io. This way a realtime
 transmission is possible.
 
-The client side js requests the plot data at `http://localhost:8080/data/:id`. After all
-pending plots are opened in a unique tab and all the data is requested, the
-server shuts down. If you fire another plot the server starts again provides
-your plot and shuts down automatically.
-
-Another port can be provided via PORT environment variable.
-
 ## Contributing
 
 Contributions in all forms are welcome.
-
-## Developers guide
-
-Fork the [Github repository](https://github.com/ngfelixl/nodeplotlib) and clone
-it to your PC. Install the npm dependencies using the `install` command. It installs
-the dependencies and copies plotly types to project source. These won't affect
-the git tree.
-
-## Roadmap
-
-It would be nice to make the library compatible with Observable-streams and update
-the plots in real-time.
 
 ## Contributors
 
