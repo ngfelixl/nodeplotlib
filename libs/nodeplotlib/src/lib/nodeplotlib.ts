@@ -38,17 +38,7 @@ export function plot(data: Plot[] | Observable<Plot[]>, layout?: Layout) {
   ]);
 }
 
-/**
- * Clears all plots and shuts down the server if it
- * exists.
- */
-export async function clear() {
-  if (app) {
-    await app.close();
-  }
-}
-
-export async function bootstrap(port: number) {
+async function bootstrap(port: number) {
   if (appRuns) {
     console.log('App is already up and running');
     return;
@@ -67,7 +57,7 @@ export async function bootstrap(port: number) {
   shutdownSubscription = bridgeService.shutdown$.subscribe(shutdown);
 }
 
-export async function shutdown() {
+async function shutdown() {
   console.log('Server shutting down');
   shutdownSubscription?.unsubscribe();
   appRuns = false;
