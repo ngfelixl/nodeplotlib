@@ -23,7 +23,9 @@
     "localhost"
   ],
   "dependencies": {
-    "@types/plotly.js": "^1.54.17"
+    "@types/plotly.js": "^1.54.17",
+    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-socket.io": "^8.2.3"
   },
   "peerDependencies": {}
 }
