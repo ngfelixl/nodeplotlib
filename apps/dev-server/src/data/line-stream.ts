@@ -1,6 +1,5 @@
 import { Plot } from '@npl/nodeplotlib';
-import { interval, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { interval, Observable, map } from 'rxjs';
 
 export const stream$: Observable<Plot[]> = interval(100).pipe(
   map((index) => {

@@ -7,10 +7,8 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
-Library to create top-notch plots directly within NodeJS on top of [plotly.js](https://plot.ly/javascript/)
+Library to create plots directly in TypeScript or JavaScript in NodeJS on top of [plotly.js](https://plot.ly/javascript/)
 without any front-end preparations. Inspired by matplotlib.
-
-[![Animation (View on Github)](https://raw.githubusercontent.com/ngfelixl/nodeplotlib/master/img/animation.gif)](https://raw.githubusercontent.com/ngfelixl/nodeplotlib/master/img/animation.gif)
 
 ## Installation
 
@@ -22,63 +20,78 @@ yarn add nodeplotlib
 
 ## Usage
 
-### Overview
+### Creating a simple plot
 
 Use with TypeScript/JavaScript:
 
 ```typescript
 import { plot, Plot } from 'nodeplotlib';
-const data: Plot[] = [{ x: [1, 3, 4, 5], y: [3, 12, 1, 4], type: 'scatter' }];
+
+const data: Plot[] = [{
+    x: [1, 3, 4, 5],
+    y: [3, 12, 1, 4],
+    type: 'scatter',
+}];
+
 plot(data);
 ```
 
-If ES5 use `require()` instead of `import`. Here is a short animation about howto and the results.
+### Creating a stream that plots data in realtime
 
-### Detailed usage
+NodePlotLib makes use of the popular [RxJS](https://rxjs.dev) library,
+which provides functionality for streams, stream creator functions (e.g. from interval or from event),
+and tons of operators to modify your stream.
 
-Since Python provides with matplotlib a library for spawning plot windows, NodeJS isn't by default.
-But there are awesome plotting libraries for usage in front-end. So this lib targets people like
-scientists who easily want to create beautiful plots in a time-saving way.
-
-The library provides a simple interface with (for now) just three functions. A `plot`, `stack` and a
-`clear` function. The `plot()` functions spawns a plot to the browser, if a plotdata is given as an
-argument. Otherwise it plots all the `stack()`ed plotdata. The arguments are of type `Plot`, which is a
-partial of plotly's `PlotData` type. With the `clear()` function the stack container can be cleared.
-
-With the stack function the user is able to print multiple charts on one page.
+In this example we create a stream based on an interval which triggers every 100ms. Then we modify
+the output of the interval (which is just a counter) to be an actual `Plot` using RxJS' `map` operator.
+The output will be a `sin` function.
 
 ```typescript
-import { plot, stack, clear, Plot } from 'nodeplotlib';
+import { plot, Plot } from 'nodeplotlib';
+import { interval, map } from 'rxjs';
 
-const data: Plot[] = [
-  {
-    x: [1, 3, 4, 6, 7],
-    y: [2, 4, 6, 8, 9],
+const stream$: Observable<Plot[]> = interval(100).pipe(
+  map(createSinusPlotFromNumber)
+);
+
+function createSinusPlotFromNumber(num: number): Plot[] {
+  const data: Plot[] = [{
+    x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    y: Array(10)
+      .fill(0)
+      .map((_, i) => Math.sin(num + i)),
     type: 'scatter',
-  },
-];
-
-stack(data);
-stack(data);
-stack(data);
-plot();
+  }];
+  return data;
+}
 ```
 
-The plot function plots all stacked plots and the plot given by parameter (if there is one).
-Afterwards the temporary container gets cleared and you can call `stack()` and `plot()` again
-without any predefined plots.
-
-The functions are of the form:
+As you can see, providing a function for a dynamic plot seems to be a good idea.
+The functions content looks almost the same as the "non-stream" version. Simple as
+that, you can just put the created Observable as an argument in the plot function:
 
 ```typescript
-import { plot, stack, clear, Plot, Layout } from 'nodeplotlib';
-
-plot(data?: Plot[], layout?: Layout): void;
-stack(data: Plot[], layout?: Layout): void;
-clear(): void;
+plot(stream$);
 ```
 
-## Quick start
+### API overview
+
+There are three exports. The `plot` function and types for the Plot and for the Layout.
+
+```typescript
+import { plot, Plot, Layout } from 'nodeplotlib';
+```
+
+The `plot` function has the following structure
+
+```typescript
+function plot(data: Plot[] | Observable<Plot[]>, layout?: Layout): void;
+```
+
+It does not return a Subscription for the Observables because you just need to close
+the listening browser window to unsubscribe from all Obserables.
+
+## Examples
 
 In this section there are some examples to getting started. See the full plotly
 [cheatsheet](https://images.plot.ly/plotly-documentation/images/plotly_js_cheat_sheet.pdf?_ga=2.2676214.711017137.1550402185-1513144731.1549064935).
@@ -166,28 +179,14 @@ plot(data, layout);
 | Sankey diagrams | Heatmaps         |          |
 | Tables          | Radar charts     |          |
 
-## Behind the scenes
-
-The lib launches a webserver and opens new tabs for every plot located at
-`http://localhost:8080/plots/:id`. At this address a temporary html template
-file, the nodeplotlib script and plotly.min.js are available. The client side
-js requests the plot data at `http://localhost:8080/data/:id`. After all
-pending plots are opened in a unique tab and all the data is requested, the
-server shuts down. If you fire another plot the server starts again provides
-your plot and shuts down automatically.
-
-Another port can be provided via PORT environment variable.
-
 ## Contributing
 
 Contributions in all forms are welcome.
 
 ## Developers guide
 
-Fork the [Github repository](https://github.com/ngfelixl/nodeplotlib) and clone
-it to your PC. Install the npm dependencies using the `install` command. It installs
-the dependencies and copies plotly types to project source. These won't affect
-the git tree.
+You can find the developers guide in the repositories root
+[README.md](https://github.com/ngfelixl/nodeplotlib).
 
 ## Contributors
 
