@@ -27,11 +27,13 @@ Use with TypeScript/JavaScript:
 ```typescript
 import { plot, Plot } from 'nodeplotlib';
 
-const data: Plot[] = [{
+const data: Plot[] = [
+  {
     x: [1, 3, 4, 5],
     y: [3, 12, 1, 4],
     type: 'scatter',
-}];
+  },
+];
 
 plot(data);
 ```
@@ -55,13 +57,15 @@ const stream$: Observable<Plot[]> = interval(100).pipe(
 );
 
 function createSinusPlotFromNumber(num: number): Plot[] {
-  const data: Plot[] = [{
-    x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    y: Array(10)
-      .fill(0)
-      .map((_, i) => Math.sin(num + i)),
-    type: 'scatter',
-  }];
+  const data: Plot[] = [
+    {
+      x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      y: Array(10)
+        .fill(0)
+        .map((_, i) => Math.sin(num + i)),
+      type: 'scatter',
+    },
+  ];
   return data;
 }
 ```
