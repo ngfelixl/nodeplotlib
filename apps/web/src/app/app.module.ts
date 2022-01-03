@@ -16,6 +16,7 @@ import { SocketService } from './services/socket.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
     DragDropModule,
     MatCardModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   providers: [PlotsService, SocketService],
   bootstrap: [AppComponent],

@@ -8,3 +8,10 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.brand .mat-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2em;
+}
