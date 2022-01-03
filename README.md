@@ -7,6 +7,8 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/nodeplotlib/)
 
+[![Animation (View on Github)](https://raw.githubusercontent.com/ngfelixl/nodeplotlib/master/img/animation-next.gif)](https://raw.githubusercontent.com/ngfelixl/nodeplotlib/master/img/animation-next.gif)
+
 This readme contains all the necessary information for the development.
 
 ## [Go to the user docs](./libs/nodeplotlib/README.md)
