@@ -52,7 +52,7 @@ async function bootstrap(port: number) {
   const actualPort = app.getHttpServer().address().port;
   bridgeService.setPort(actualPort);
   plotsService.setBuffer(plotsBuffer$);
-  console.log('Server runnng at', actualPort);
+  console.log('Server running at', `http://localhost:${actualPort}`);
 
   shutdownSubscription = bridgeService.shutdown$.subscribe(shutdown);
 }

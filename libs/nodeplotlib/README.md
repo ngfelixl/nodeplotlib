@@ -1,5 +1,3 @@
-
-
 # <img src="../../img/nodeplotlib_64x64.png" width="28px" height="28px"> NodePlotLib
 
 [![NodeJS CI](https://github.com/ngfelixl/nodeplotlib/workflows/Node.js%20CI/badge.svg)](https://github.com/ngfelixl/nodeplotlib/actions?query=workflow%3A%22Node.js+CI%22)
