@@ -1,0 +1,37 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <span class="brand" routerLink="/">
+    <button mat-button>
+      <img
+        src="./assets/nodeplotlib_64x64_transparent.png"
+        alt="NodePlotLib Brand Icon"
+        height="32px"
+        width="32px"
+      />
+      <span>
+        <span class="green">N</span>ode<span class="green">P</span>lot<span
+          class="green"
+          >L</span
+        >ib
+      </span>
+    </button>
+  </span>
+  <span class="info-icons">
+    <button mat-icon-button routerLink="tutorial" matTooltip="Tutorial">
+      <mat-icon>tips_and_updates</mat-icon>
+    </button>
+    <a href="https://plotly.com/javascript/" target="_blank" rel="noreferrer"
+      ><button mat-icon-button matTooltip="Plotly.js Documentation">
+        <img src="/assets/plotly.svg" alt="Plotly.js Icon" /></button
+    ></a>
+    <a
+      href="https://github.com/ngfelixl/nodeplotlib"
+      target="_blank"
+      rel="noreferrer"
+      ><button mat-icon-button>
+        <img src="/assets/github-light-32px.png" alt="Github Icon" /></button
+    ></a>
+  </span>
+</mat-toolbar>
+<main>
+  <router-outlet></router-outlet>
+</main>

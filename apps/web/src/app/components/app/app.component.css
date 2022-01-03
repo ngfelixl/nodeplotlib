@@ -1,0 +1,38 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+main {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+mat-toolbar {
+  flex: 0 0 auto;
+  justify-content: space-between;
+}
+
+.info-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.info-icons img {
+  width: 24px;
+  height: 24px;
+}
+
+.green {
+  color: #00ff2a;
+}
