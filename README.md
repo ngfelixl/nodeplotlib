@@ -66,7 +66,7 @@ This is a note for maintainers only. There are several steps to follow before yo
 can publish the new version to npm.
 
 1. Bump the version number using semver. Use "rc" for release candidates as the _preid_, e.g.
-   `1.0.0-rc1`. Updat the version number in the root [package.json](./package.json)
+   `1.0.0-rc1`. Update the version number in the root [package.json](./package.json)
    and in the libs [package.json](./libs/nodeplotlib/package.json).
 2. If everything is committed and in place on "master" for non-release candidates,
    or on "release/..." for release candidates. Create a tag with that version number,
