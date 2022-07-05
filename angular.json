@@ -7,7 +7,7 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/dev-server",
@@ -37,7 +37,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/node:execute",
+          "builder": "@nrwl/node:node",
           "options": {
             "buildTarget": "dev-server:build"
           }
@@ -66,14 +66,14 @@
       "projectType": "library",
       "architect": {
         "build": {
-          "builder": "@nrwl/node:package",
+          "builder": "@nrwl/node:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "main": "libs/nodeplotlib/src/index.ts",
             "outputPath": "dist/libs/nodeplotlib",
             "tsConfig": "libs/nodeplotlib/tsconfig.lib.json",
-            "packageJson": "libs/nodeplotlib/package.json",
-            "main": "libs/nodeplotlib/src/index.ts",
-            "assets": ["libs/nodeplotlib/*.md"]
+            "generatePackageJson": true,
+            "extractLicenses": true
           }
         },
         "lint": {
