@@ -1,0 +1,86 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/web/src",
+  "prefix": "npl",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/web",
+        "index": "apps/web/src/index.html",
+        "main": "apps/web/src/main.ts",
+        "polyfills": "apps/web/src/polyfills.ts",
+        "tsConfig": "apps/web/tsconfig.app.json",
+        "assets": ["apps/web/src/favicon.ico", "apps/web/src/assets"],
+        "styles": ["apps/web/src/custom-theme.scss", "apps/web/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/web/src/environments/environment.ts",
+              "with": "apps/web/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "none"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "web:build:production"
+        },
+        "development": {
+          "browserTarget": "web:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "web:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/web/src/**/*.ts", "apps/web/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/web"],
+      "options": {
+        "jestConfig": "apps/web/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

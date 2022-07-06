@@ -1,7 +1,8 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "npl",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "implicitDependencies": {
     "package.json": {
@@ -12,19 +13,31 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "parallel": 1
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  }
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  },
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "defaultProject": "web"
 }

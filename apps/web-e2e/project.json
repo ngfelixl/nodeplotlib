@@ -1,0 +1,29 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/web-e2e/src",
+  "projectType": "application",
+  "architect": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web-e2e/cypress.json",
+        "devServerTarget": "web:serve:development",
+        "tsConfig": "apps/web-e2e/tsconfig.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/web-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["web"]
+}
