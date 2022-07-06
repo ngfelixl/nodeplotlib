@@ -1,0 +1,35 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "root": "libs/nodeplotlib",
+  "sourceRoot": "libs/nodeplotlib/src",
+  "projectType": "library",
+  "architect": {
+    "build": {
+      "builder": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "main": "libs/nodeplotlib/src/index.ts",
+        "outputPath": "dist/libs/nodeplotlib",
+        "tsConfig": "libs/nodeplotlib/tsconfig.lib.json",
+        "generatePackageJson": true,
+        "extractLicenses": true
+      }
+    },
+    "lint": {
+      "builder": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/nodeplotlib/**/*.ts"]
+      }
+    },
+    "test": {
+      "builder": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/nodeplotlib"],
+      "options": {
+        "jestConfig": "libs/nodeplotlib/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

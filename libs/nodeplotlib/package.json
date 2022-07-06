@@ -1,6 +1,6 @@
 {
   "name": "nodeplotlib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NodeJS frontend-less plotting lib using plotly.js inspired by matplotlib",
   "author": "Felix Lemke <flemke.dev@gmail.com> (https://felixlemke.dev)",
   "license": "MIT",
@@ -14,10 +14,10 @@
   "homepage": "https://github.com/ngfelixl/nodeplotlib#readme",
   "keywords": [
     "plot",
-    "easy-to-use",
-    "no-frontend",
+    "nodejs",
     "plotlyjs",
     "science",
+    "easy-to-use",
     "statistics",
     "browser",
     "localhost"
