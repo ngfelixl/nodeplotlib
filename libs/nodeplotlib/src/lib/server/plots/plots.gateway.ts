@@ -56,12 +56,12 @@ export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   handleConnection(client: WebSocket) {
-    console.log('client connected');
+    console.log('[Nodeplotlib] client connected');
     this.clientMap.set(client, Date.now());
   }
 
   handleDisconnect(client: WebSocket) {
-    console.log('client disconnected');
+    console.log('[Nodeplotlib] client disconnected');
     this.clientMap.delete(client);
 
     if (this.clientMap.size === 0) {

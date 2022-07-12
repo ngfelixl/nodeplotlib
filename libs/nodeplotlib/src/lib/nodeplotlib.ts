@@ -45,7 +45,7 @@ export function plot(
 
 async function bootstrap(port: number) {
   if (appRuns) {
-    console.log('App is already up and running');
+    console.log('[Nodeplotlib] App is already up and running');
     return;
   }
   appRuns = true;
@@ -57,13 +57,16 @@ async function bootstrap(port: number) {
   const actualPort = app.getHttpServer().address().port;
   bridgeService.setPort(actualPort);
   plotsService.setBuffer(plotsBuffer$);
-  console.log('Server running at', `http://localhost:${actualPort}`);
+  console.log(
+    '[Nodeplotlib] Server running at',
+    `http://localhost:${actualPort}`
+  );
 
   shutdownSubscription = bridgeService.shutdown$.subscribe(shutdown);
 }
 
 async function shutdown() {
-  console.log('Server shutting down');
+  console.log('[Nodeplotlib] Server shutting down');
   shutdownSubscription?.unsubscribe();
   appRuns = false;
 
