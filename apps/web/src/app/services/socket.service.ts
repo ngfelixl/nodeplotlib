@@ -10,11 +10,11 @@ export class SocketService implements OnDestroy {
     this.socket = io(environment.socketIoEndpoint, { transports: ['polling'] });
 
     this.socket.on('connect', () => {
-      console.log('connected');
+      console.log('[Nodeplotlib] connected');
     });
 
     this.socket.on('disconnect', () => {
-      console.log('disconnected');
+      console.log('[Nodeplotlib] disconnected');
     });
   }
 
