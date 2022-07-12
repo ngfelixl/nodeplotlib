@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { PlotData } from '@npl/nodeplotlib';
 import { BehaviorSubject } from 'rxjs';
-import { SocketService } from './socket.service';
 import { map } from 'rxjs/operators';
+import { SocketService } from './socket.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PlotsService {
   private plotDataMap$ = new BehaviorSubject<Map<number, PlotData>>(new Map());
   plots$ = this.plotDataMap$.pipe(

@@ -22,6 +22,7 @@ export class PlotsService {
       id: this.currentPlotId++,
       data: plotData.data,
       layout: plotData.layout,
+      config: plotData.config,
     };
 
     this.plotEntities.set(plot.id, plot);

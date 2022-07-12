@@ -6,6 +6,7 @@ import { PlotsService } from './server/plots/plots.service';
 import { ServerModule } from './server/server.module';
 import { BridgeService } from './server/services/bridge.service';
 import { getPort } from './utils/get-port';
+import { Config } from './interfaces/plot';
 let app: INestApplication | null = null;
 let plotsService: PlotsService;
 let bridgeService: BridgeService;
@@ -26,7 +27,11 @@ const port = getPort();
  * @param layout
  * @param cb
  */
-export function plot(data: Plot[] | Observable<Plot[]>, layout?: Layout) {
+export function plot(
+  data: Plot[] | Observable<Plot[]>,
+  layout?: Layout,
+  config?: Config
+) {
   bootstrap(port);
   const bufferedPlots = plotsBuffer$.value;
 
@@ -34,7 +39,7 @@ export function plot(data: Plot[] | Observable<Plot[]>, layout?: Layout) {
     data instanceof Observable ? data : of(data);
   plotsBuffer$.next([
     ...bufferedPlots,
-    { data: streamData$, layout: of(layout) },
+    { data: streamData$, layout: of(layout), config },
   ]);
 }
 

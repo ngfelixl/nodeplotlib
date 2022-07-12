@@ -7,12 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
-import { PlotsService } from './services/plots.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PlotComponent } from './components/plot/plot.component';
 import { PlotsComponent } from './components/plots/plots.component';
-import { SocketService } from './services/socket.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,7 +37,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule,
   ],
-  providers: [PlotsService, SocketService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
