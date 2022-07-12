@@ -28,7 +28,7 @@ export class PlotComponent implements AfterViewInit, OnChanges {
       this.plotContainer.nativeElement,
       this.plotData.data,
       { ...(this.plotData.layout ?? {}), autosize: true },
-      { responsive: true }
+      { ...(this.plotData.config ?? {}), responsive: true }
     );
   }
 
@@ -38,7 +38,7 @@ export class PlotComponent implements AfterViewInit, OnChanges {
         this.plotContainer.nativeElement,
         this.plotData.data,
         { ...(this.plotData.layout ?? {}), autosize: true },
-        { responsive: true }
+        { ...(this.plotData.config ?? {}), responsive: true }
       );
     }
   }

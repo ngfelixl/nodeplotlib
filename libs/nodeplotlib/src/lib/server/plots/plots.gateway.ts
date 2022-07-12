@@ -30,7 +30,14 @@ export class PlotsGateway implements OnGatewayConnection, OnGatewayDisconnect {
             return combineLatest([
               plotDataStream.data,
               plotDataStream.layout,
-            ]).pipe(map(([data, layout]) => ({ id, data, layout })));
+            ]).pipe(
+              map(([data, layout]) => ({
+                id,
+                data,
+                layout,
+                config: plotDataStream.config,
+              }))
+            );
           })
         )
       ),
