@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutesReuseStrategy, AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -15,6 +15,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule,
   ],
-  providers: [],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: AppRoutesReuseStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
