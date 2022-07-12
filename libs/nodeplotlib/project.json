@@ -5,7 +5,7 @@
   "projectType": "library",
   "architect": {
     "build": {
-      "builder": "@nrwl/node:webpack",
+      "builder": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "main": "libs/nodeplotlib/src/index.ts",
