@@ -32,7 +32,7 @@
     "@ngrx/effects": "~14.0.1",
     "@ngrx/entity": "~14.0.1",
     "@ngrx/store": "~14.0.1",
-    "@nrwl/angular": "14.4.2",
+    "@nrwl/angular": "14.8.6",
     "@types/plotly.js": "^1.54.17",
     "express": "^4.17.1",
     "reflect-metadata": "^0.1.13",
@@ -42,7 +42,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~14.0.0",
+    "@angular-devkit/build-angular": "~15.0.0",
     "@angular-eslint/eslint-plugin": "~14.0.0",
     "@angular-eslint/eslint-plugin-template": "~14.0.0",
     "@angular-eslint/template-parser": "~14.0.0",
